@@ -26,72 +26,76 @@
   font-display: swap;
 }
 
+/* Paleta: no es "dark mode + acento", es una terminal física real.
+   --bg tiene tinte azulado de fósforo CRT apagado (no negro puro de OLED).
+   --text es beige de papel térmico de recibo/impresora de matriz, no blanco.
+   --accent es verde fósforo quemado (P1 phosphor), no verde saturado de marca. */
 :root {
-  --bg: #0d1117;
-  --bg-raised: #12181f;
-  --surface: #161b22;
-  --surface-2: #1c232c;
-  --border: #262d38;
-  --border-soft: #1d2530;
-  --text: #c9d1d9;
-  --text-dim: #7d8895;
-  --text-faint: #4d5560;
-  --accent: #4ade80;
-  --accent-dim: #2f9f5e;
-  --accent-glow: rgba(74, 222, 128, 0.14);
-  --amber: #e8a445;
-  --amber-dim: #a97530;
-  --amber-glow: rgba(232, 164, 69, 0.14);
-  --red: #f0665a;
-  --blue: #6cb2f4;
-  --violet: #b592f5;
-  --shadow: rgba(0, 0, 0, 0.45);
+  --bg: #0a0d10;
+  --bg-raised: #0f1317;
+  --surface: #12171b;
+  --surface-2: #171d22;
+  --border: #262e34;
+  --border-soft: #1b2227;
+  --text: #d8d2c0;
+  --text-dim: #8b9088;
+  --text-faint: #4c534f;
+  --accent: #8fffb0;
+  --accent-dim: #4f9e6a;
+  --accent-glow: rgba(143, 255, 176, 0.12);
+  --amber: #ffb545;
+  --amber-dim: #b3812f;
+  --amber-glow: rgba(255, 181, 69, 0.12);
+  --red: #ff6b6b;
+  --blue: #5aa9ff;
+  --violet: #c39bff;
+  --shadow: rgba(0, 0, 0, 0.5);
 }
 
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="light"]) {
-    --bg: #0d1117;
-    --bg-raised: #12181f;
-    --surface: #161b22;
-    --surface-2: #1c232c;
-    --border: #262d38;
-    --border-soft: #1d2530;
-    --text: #c9d1d9;
-    --text-dim: #7d8895;
-    --text-faint: #4d5560;
-    --accent: #4ade80;
-    --accent-dim: #2f9f5e;
-    --accent-glow: rgba(74, 222, 128, 0.14);
-    --amber: #e8a445;
-    --amber-dim: #a97530;
-    --amber-glow: rgba(232, 164, 69, 0.14);
-    --red: #f0665a;
-    --blue: #6cb2f4;
-    --violet: #b592f5;
-    --shadow: rgba(0, 0, 0, 0.45);
+    --bg: #0a0d10;
+    --bg-raised: #0f1317;
+    --surface: #12171b;
+    --surface-2: #171d22;
+    --border: #262e34;
+    --border-soft: #1b2227;
+    --text: #d8d2c0;
+    --text-dim: #8b9088;
+    --text-faint: #4c534f;
+    --accent: #8fffb0;
+    --accent-dim: #4f9e6a;
+    --accent-glow: rgba(143, 255, 176, 0.12);
+    --amber: #ffb545;
+    --amber-dim: #b3812f;
+    --amber-glow: rgba(255, 181, 69, 0.12);
+    --red: #ff6b6b;
+    --blue: #5aa9ff;
+    --violet: #c39bff;
+    --shadow: rgba(0, 0, 0, 0.5);
   }
 }
 
 :root[data-theme="dark"] {
-  --bg: #0d1117;
-  --bg-raised: #12181f;
-  --surface: #161b22;
-  --surface-2: #1c232c;
-  --border: #262d38;
-  --border-soft: #1d2530;
-  --text: #c9d1d9;
-  --text-dim: #7d8895;
-  --text-faint: #4d5560;
-  --accent: #4ade80;
-  --accent-dim: #2f9f5e;
-  --accent-glow: rgba(74, 222, 128, 0.14);
-  --amber: #e8a445;
-  --amber-dim: #a97530;
-  --amber-glow: rgba(232, 164, 69, 0.14);
-  --red: #f0665a;
-  --blue: #6cb2f4;
-  --violet: #b592f5;
-  --shadow: rgba(0, 0, 0, 0.45);
+  --bg: #0a0d10;
+  --bg-raised: #0f1317;
+  --surface: #12171b;
+  --surface-2: #171d22;
+  --border: #262e34;
+  --border-soft: #1b2227;
+  --text: #d8d2c0;
+  --text-dim: #8b9088;
+  --text-faint: #4c534f;
+  --accent: #8fffb0;
+  --accent-dim: #4f9e6a;
+  --accent-glow: rgba(143, 255, 176, 0.12);
+  --amber: #ffb545;
+  --amber-dim: #b3812f;
+  --amber-glow: rgba(255, 181, 69, 0.12);
+  --red: #ff6b6b;
+  --blue: #5aa9ff;
+  --violet: #c39bff;
+  --shadow: rgba(0, 0, 0, 0.5);
 }
 
 * { box-sizing: border-box; }
@@ -109,8 +113,8 @@ body {
   font-size: 15px;
   line-height: 1.6;
   background-image:
-    radial-gradient(ellipse 800px 400px at 15% -5%, var(--accent-glow), transparent 60%),
-    radial-gradient(ellipse 600px 500px at 100% 10%, var(--amber-glow), transparent 55%);
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.018) 0px, rgba(255,255,255,0.018) 1px, transparent 1px, transparent 3px),
+    radial-gradient(ellipse 900px 500px at 20% -10%, var(--accent-glow), transparent 55%);
   background-attachment: fixed;
 }
 
@@ -129,45 +133,44 @@ a { color: var(--accent); }
 .hero {
   border: 1px solid var(--border);
   background: var(--surface);
-  border-radius: 10px;
-  box-shadow: 0 20px 50px -25px var(--shadow);
   overflow: hidden;
-  margin-bottom: 56px;
+  margin-bottom: 40px;
 }
 
+/* Header de man page real: SHELL(1) a la izq y der, sección al centro —
+   como `man bash` en cualquier terminal Unix. No decora "esto es una
+   terminal", literalmente estructura la página como su propia documentación. */
 .hero-titlebar {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
+  justify-content: space-between;
+  padding: 10px 20px;
   background: var(--bg-raised);
   border-bottom: 1px solid var(--border);
-}
-
-.dot { width: 11px; height: 11px; border-radius: 50%; }
-.dot.r { background: #ff5f56; }
-.dot.y { background: #ffbd2e; }
-.dot.g { background: #27c93f; }
-
-.hero-titlebar span.label {
-  margin-left: 10px;
-  font-size: 12px;
+  font-family: 'JBM', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--text-faint);
-  letter-spacing: 0.03em;
 }
+
+.hero-titlebar .manref { color: var(--text-faint); }
+.hero-titlebar .mansection { color: var(--accent-dim); }
 
 .hero-body {
-  padding: 32px 28px 34px;
+  padding: 40px 32px 36px;
   min-height: 190px;
   position: relative;
 }
 
 .hero-mark {
   position: absolute;
-  top: 28px;
-  right: 28px;
-  width: 26px;
-  height: 26px;
+  top: 30px;
+  right: 32px;
+  width: 24px;
+  height: 24px;
+  opacity: 0.5;
 }
 
 .boot-line {
@@ -201,11 +204,12 @@ a { color: var(--accent); }
 }
 
 .tagline {
-  margin-top: 18px;
+  margin-top: 22px;
   font-family: 'JBM', monospace;
-  font-size: clamp(24px, 4vw, 34px);
+  font-size: clamp(26px, 4.4vw, 40px);
   font-weight: 700;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.035em;
+  text-transform: uppercase;
   color: var(--text);
   text-wrap: balance;
   opacity: 0;
@@ -215,10 +219,12 @@ a { color: var(--accent); }
 .tagline .amber-t { color: var(--amber); }
 
 .sub {
-  margin-top: 10px;
+  margin-top: 12px;
   color: var(--text-dim);
   font-size: 14.5px;
-  max-width: 60ch;
+  max-width: 58ch;
+  padding-left: 14px;
+  border-left: 2px solid var(--border);
   opacity: 0;
 }
 
@@ -226,11 +232,10 @@ a { color: var(--accent); }
 
 .tip-panel {
   border: 1px solid var(--border);
-  background: linear-gradient(180deg, var(--surface-2), var(--surface));
-  border-radius: 10px;
-  margin-bottom: 56px;
+  border-left: 2px solid var(--amber-dim);
+  background: var(--surface-2);
+  margin-bottom: 40px;
   overflow: hidden;
-  box-shadow: 0 20px 50px -30px var(--shadow);
 }
 
 .tip-header {
@@ -365,8 +370,6 @@ a { color: var(--accent); }
 .deck {
   border: 1px solid var(--border);
   background: var(--surface);
-  border-radius: 10px;
-  box-shadow: 0 20px 50px -30px var(--shadow);
   overflow: hidden;
 }
 
@@ -528,8 +531,9 @@ a { color: var(--accent); }
 
   <div class="hero">
     <div class="hero-titlebar">
-      <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
-      <span class="label">zsh — 80×24</span>
+      <span class="manref">SHELL(1)</span>
+      <span class="mansection">MANUAL DEL USUARIO — DIXON</span>
+      <span class="manref">SHELL(1)</span>
     </div>
     <div class="hero-body">
       <svg class="claude-mark hero-mark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -583,7 +587,7 @@ a { color: var(--accent); }
     </div>
   </div>
 
-  <div class="foot">construido con <span class="accent">■</span> para dixon · actualiza la página para nuevos tips</div>
+  <div class="foot">SHELL(1) <span class="accent">·</span> última actualización: siempre que Dixon rompe algo en prod <span class="accent">·</span> recarga para más tips</div>
 
 </div>
 
