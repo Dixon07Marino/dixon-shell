@@ -50,6 +50,8 @@
   --blue: #5aa9ff;
   --violet: #c39bff;
   --cyan: #00add8;
+  --orange: #ff9a3c;
+  --azure: #6e9bff;
   --shadow: rgba(0, 0, 0, 0.5);
 }
 
@@ -74,6 +76,8 @@
     --blue: #5aa9ff;
     --violet: #c39bff;
     --cyan: #00add8;
+    --orange: #ff9a3c;
+    --azure: #6e9bff;
     --shadow: rgba(0, 0, 0, 0.5);
   }
 }
@@ -98,6 +102,8 @@
   --blue: #5aa9ff;
   --violet: #c39bff;
   --cyan: #00add8;
+  --orange: #ff9a3c;
+  --azure: #6e9bff;
   --shadow: rgba(0, 0, 0, 0.5);
 }
 
@@ -413,6 +419,8 @@ a { color: var(--accent); }
 .tabbtn[data-tab="sql"] .tab-icon { color: var(--violet); }
 .tabbtn[data-tab="claude"] .tab-icon { color: var(--amber); }
 .tabbtn[data-tab="go"] .tab-icon { color: var(--cyan); }
+.tabbtn[data-tab="aws"] .tab-icon { color: var(--orange); }
+.tabbtn[data-tab="azure"] .tab-icon { color: var(--azure); }
 .tabbtn.active .tab-icon { color: var(--bg); }
 
 .panels { padding: 26px 26px 30px; }
@@ -497,6 +505,8 @@ a { color: var(--accent); }
 .grp[data-cat="sql"] .cmd-code { color: var(--violet); }
 .grp[data-cat="claude"] .cmd-code { color: var(--text); }
 .grp[data-cat="go"] .cmd-code { color: var(--cyan); }
+.grp[data-cat="aws"] .cmd-code { color: var(--orange); }
+.grp[data-cat="azure"] .cmd-code { color: var(--azure); }
 
 .cmd-desc {
   color: var(--text-dim);
@@ -504,6 +514,80 @@ a { color: var(--accent); }
 }
 
 .cmd-row.hidden { display: none; }
+
+/* ---------- PLAYGROUND ---------- */
+
+.cmd-row { position: relative; }
+
+.try-btn {
+  justify-self: start;
+  font-family: 'JBM', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  border-radius: 4px;
+  padding: 3px 8px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+.try-btn:hover { border-color: var(--accent-dim); color: var(--accent); }
+.try-btn:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+
+@media (min-width: 601px) {
+  .try-btn { position: absolute; top: 10px; right: 6px; opacity: 0.45; }
+  .cmd-row:hover .try-btn, .try-btn:focus-visible { opacity: 1; }
+  .cmd-row .cmd-code, .cmd-row .cmd-desc { margin-right: 96px; }
+}
+
+.tabbtn[data-tab="play"] .tab-icon { color: var(--accent); }
+
+.pg-mission {
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--accent-dim);
+  background: var(--surface-2);
+  padding: 12px 16px;
+  margin-bottom: 14px;
+}
+.pg-m-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.pg-m-title { font-family: 'JBM', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+.pg-m-btns { display: flex; gap: 6px; }
+.pg-m-btns button {
+  font-family: 'JBM', monospace; font-size: 11px; background: transparent; color: var(--text-dim);
+  border: 1px solid var(--border); border-radius: 4px; padding: 3px 9px; cursor: pointer;
+}
+.pg-m-btns button:hover { border-color: var(--accent-dim); color: var(--accent); }
+.pg-m-btns button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.pg-m-desc { margin-top: 6px; font-size: 14px; color: var(--text); }
+.pg-m-hint { margin-top: 8px; font-family: 'JBM', monospace; font-size: 12.5px; color: var(--amber); white-space: pre-wrap; word-break: break-word; }
+.pg-m-hint[hidden] { display: none; }
+
+.pg-screen {
+  height: 460px;
+  overflow-y: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 14px 16px;
+  font-family: 'JBM', monospace;
+  font-size: 13px;
+  line-height: 1.55;
+  cursor: text;
+}
+.pg-line { white-space: pre-wrap; word-break: break-word; min-height: 1.55em; color: var(--text); }
+.pg-prompt { color: var(--accent); }
+.pg-dir { color: var(--blue); font-weight: 700; }
+.pg-ok { color: var(--accent); }
+.pg-err { color: var(--red); }
+.pg-warn { color: var(--amber); }
+.pg-dim { color: var(--text-dim); }
+.pg-inline { display: flex; align-items: baseline; gap: 0; }
+.pg-inline .pg-prompt { white-space: pre; flex: none; }
+.pg-input {
+  flex: 1; min-width: 0; background: transparent; border: none; outline: none;
+  color: var(--text); font: inherit; caret-color: var(--accent); padding: 0;
+}
 
 /* ---------- FOOTER ---------- */
 
@@ -540,7 +624,7 @@ a { color: var(--accent); }
     <div class="hero-body">
       <div id="bootOut"></div>
       <div class="tagline" id="tagline">the <span class="accent">terminal</span>-flavored <span class="amber-t">cheatsheet</span></div>
-      <div class="sub" id="subline">Git, Linux, Docker, SQL/PostgreSQL, Claude Code y Go en un solo lugar — más tips que rotan cada vez que vuelves. Sin cuenta, sin distracciones, solo referencia rápida.</div>
+      <div class="sub" id="subline">Git, Linux, Docker, SQL/PostgreSQL, Claude Code, Go, AWS y Azure DevOps en un solo lugar, más una shell simulada para practicar — más tips que rotan cada vez que vuelves. Sin cuenta, sin distracciones, solo referencia rápida.</div>
     </div>
   </div>
 
@@ -602,6 +686,24 @@ a { color: var(--accent); }
           <path d="M108.2 64.8c-.1-.1-.2-.2-.4-.2l-.1-.1c-.1-.1-.2-.1-.2-.2l-.1-.1c-.1 0-.2-.1-.2-.1l-.2-.1c-.1 0-.2-.1-.2-.1l-.2-.1c-.1 0-.2-.1-.2-.1-.1 0-.1 0-.2-.1l-.3-.1c-.1 0-.1 0-.2-.1l-.3-.1h-.1l-.4-.1h-.2c-.1 0-.2 0-.3-.1h-2.3c-.6-13.3.6-26.8-2.8-39.6 12.9-4.6 2.8-22.3-8.4-14.4-7.4-6.4-17.6-7.8-28.3-7.8-10.5.7-20.4 2.9-27.4 8.4-2.8-1.4-5.5-1.8-7.9-1.1v.1c-.1 0-.3.1-.4.2-.1 0-.3.1-.4.2h-.1c-.1 0-.2.1-.4.2h-.1l-.3.2h-.1l-.3.2h-.1l-.3.2s-.1 0-.1.1l-.3.2s-.1 0-.1.1l-.3.2s-.1 0-.1.1l-.3.2-.1.1c-.1.1-.2.1-.2.2l-.1.1-.2.2-.1.1c-.1.1-.1.2-.2.2l-.1.1c-.1.1-.1.2-.2.2l-.1.1c-.1.1-.1.2-.2.2l-.1.1c-.1.1-.1.2-.2.2l-.1.1c-.1.1-.1.2-.2.2l-.1.1-.1.3s0 .1-.1.1l-.1.3s0 .1-.1.1l-.1.3s0 .1-.1.1l-.1.3s0 .1-.1.1c.4.3.4.4.4.4v.1l-.1.3v.1c0 .1 0 .2-.1.3v3.1c0 .1 0 .2.1.3v.1l.1.3v.1l.1.3s0 .1.1.1l.1.3s0 .1.1.1l.1.3s0 .1.1.1l.2.3s0 .1.1.1l.2.3s0 .1.1.1l.2.3.1.1.3.3.3.3h.1c1 .9 2 1.6 4 2.2v-.2C23 37.3 26.5 50 26.7 63c-.6 0-.7.4-1.7.5h-.5c-.1 0-.3 0-.5.1-.1 0-.3 0-.4.1l-.4.1h-.1l-.4.1h-.1l-.3.1h-.1l-.3.1s-.1 0-.1.1l-.3.1-.2.1c-.1 0-.2.1-.2.1l-.2.1-.2.1c-.1 0-.2.1-.2.1l-.2.1-.4.3c-.1.1-.2.2-.3.2l-.4.4-.1.1c-.1.2-.3.4-.4.5l-.2.3-.3.6-.1.3v.3c0 .5.2.9.9 1.2.2 3.7 3.9 2 5.6.8l.1-.1c.2-.2.5-.3.6-.3h.1l.2-.1c.1 0 .1 0 .2-.1.2-.1.4-.1.5-.2.1 0 .1-.1.1-.2l.1-.1c.1-.2.2-.6.2-1.2l.1-1.3v1.8c-.5 13.1-4 30.7 3.3 42.5 1.3 2.1 2.9 3.9 4.7 5.4h-.5c-.2.2-.5.4-.8.6l-.9.6-.3.2-.6.4-.9.7-1.1 1c-.2.2-.3.4-.4.5l-.4.6-.2.3c-.1.2-.2.4-.2.6l-.1.3c-.2.8 0 1.7.6 2.7l.4.4h.2c.1 0 .2 0 .4.1.2.4 1.2 2.5 3.9.9 2.8-1.5 4.7-4.6 8.1-5.1l-.5-.6c5.9 2.8 12.8 4 19 4.2 8.7.3 18.6-.9 26.5-5.2 2.2.7 3.9 3.9 5.8 5.4l.1.1.1.1.1.1.1.1s.1 0 .1.1c0 0 .1 0 .1.1 0 0 .1 0 .1.1h2.1s.1 0 .1-.1h.1s.1 0 .1-.1h.1s.1 0 .1-.1c0 0 .1 0 .1-.1l.1-.1s.1 0 .1-.1l.1-.1h.1l.2-.2.2-.1h.1l.1-.1h.1l.1-.1.1-.1.1-.1.1-.1.1-.1.1-.1.1-.1v-.1s0-.1.1-.1v-.1s0-.1.1-.1v-.1s0-.1.1-.1v-1.4s-.3 0-.3-.1l-.3-.1v-.1l.3-.1s.2 0 .2-.1l.1-.1v-2.1s0-.1-.1-.1v-.1s0-.1-.1-.1v-.1s0-.1-.1-.1c0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1 0 0 0-.1-.1-.1l-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1v-.1l-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1-.1c2-1.9 3.8-4.2 5.1-6.9 5.9-11.8 4.9-26.2 4.1-39.2h.1c.1 0 .2.1.2.1h.3s.1 0 .1.1h.1s.1 0 .1.1l.2.1c1.7 1.2 5.4 2.9 5.6-.8 1.6.6-.3-1.8-1.3-2.5zM36 23C32.8 7 58.4 4 59.3 19.6c.8 13-20 16.3-23.3 3.4zm36.1 15c-1.3 1.4-2.7 1.2-4.1.7 0 1.9.4 3.9.1 5.9-.5.9-1.5 1-2.3 1.4-1.2-.2-2.1-.9-2.6-2l-.2-.1c-3.9 5.2-6.3-1.1-5.2-5-1.2.1-2.2-.2-3-1.5-1.4-2.6.7-5.8 3.4-6.3.7 3 8.7 2.6 10.1-.2 3.1 1.5 6.5 4.3 3.8 7.1zm-7-17.5c-.9-13.8 20.3-17.5 23.4-4 3.5 15-20.8 18.9-23.4 4zM41.7 17c-1.9 0-3.5 1.7-3.5 3.8 0 2.1 1.6 3.8 3.5 3.8s3.5-1.7 3.5-3.8c0-2.1-1.5-3.8-3.5-3.8zm1.6 5.7c-.5 0-.8-.4-.8-1 0-.5.4-1 .8-1 .5 0 .8.4.8 1 0 .5-.3 1-.8 1zm27.8-6.6c-1.9 0-3.4 1.7-3.4 3.8 0 2.1 1.5 3.8 3.4 3.8s3.4-1.7 3.4-3.8c0-2.1-1.5-3.8-3.4-3.8zm1.6 5.6c-.4 0-.8-.4-.8-1 0-.5.4-1 .8-1s.8.4.8 1-.4 1-.8 1z"/>
         </svg>
         go <span class="n" id="cnt-go"></span>
+      </button>
+      <button class="tabbtn" data-tab="aws">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M6.763 10.036c0 .296.032.535.088.71.064.176.144.368.256.576.04.063.056.127.056.183 0 .08-.048.16-.152.24l-.503.335a.383.383 0 0 1-.208.072c-.08 0-.16-.04-.239-.112a2.47 2.47 0 0 1-.287-.375 6.18 6.18 0 0 1-.248-.471c-.622.734-1.405 1.101-2.347 1.101-.67 0-1.205-.191-1.596-.574-.391-.384-.59-.894-.59-1.533 0-.678.239-1.23.726-1.644.487-.415 1.133-.623 1.955-.623.272 0 .551.024.846.064.296.04.6.104.918.176v-.583c0-.607-.127-1.03-.375-1.277-.255-.248-.686-.367-1.3-.367-.28 0-.568.031-.863.103-.295.072-.583.16-.862.272a2.287 2.287 0 0 1-.28.104.488.488 0 0 1-.127.023c-.112 0-.168-.08-.168-.247v-.391c0-.128.016-.224.056-.28a.597.597 0 0 1 .224-.167c.279-.144.614-.264 1.005-.36a4.84 4.84 0 0 1 1.246-.151c.95 0 1.644.216 2.091.647.439.43.662 1.085.662 1.963v2.586zm-3.24 1.214c.263 0 .534-.048.822-.144.287-.096.543-.271.758-.51.128-.152.224-.32.272-.512.047-.191.08-.423.08-.694v-.335a6.66 6.66 0 0 0-.735-.136 6.02 6.02 0 0 0-.75-.048c-.535 0-.926.104-1.19.32-.263.215-.39.518-.39.917 0 .375.095.655.295.846.191.2.47.296.838.296zm6.41.862c-.144 0-.24-.024-.304-.08-.064-.048-.12-.16-.168-.311L7.586 5.55a1.398 1.398 0 0 1-.072-.32c0-.128.064-.2.191-.2h.783c.151 0 .255.025.31.08.065.048.113.16.16.312l1.342 5.284 1.245-5.284c.04-.16.088-.264.151-.312a.549.549 0 0 1 .32-.08h.638c.152 0 .256.025.32.08.063.048.12.16.151.312l1.261 5.348 1.381-5.348c.048-.16.104-.264.16-.312a.52.52 0 0 1 .311-.08h.743c.127 0 .2.065.2.2 0 .04-.009.08-.017.128a1.137 1.137 0 0 1-.056.2l-1.923 6.17c-.048.16-.104.263-.168.311a.51.51 0 0 1-.303.08h-.687c-.151 0-.255-.024-.32-.08-.063-.056-.119-.16-.15-.32l-1.238-5.148-1.23 5.14c-.04.16-.087.264-.15.32-.065.056-.177.08-.32.08zm10.256.215c-.415 0-.83-.048-1.229-.143-.399-.096-.71-.2-.918-.32-.128-.071-.215-.151-.247-.223a.563.563 0 0 1-.048-.224v-.407c0-.167.064-.247.183-.247.048 0 .096.008.144.024.048.016.12.048.2.08.271.12.566.215.878.279.319.064.63.096.95.096.502 0 .894-.088 1.165-.264a.86.86 0 0 0 .415-.758.777.777 0 0 0-.215-.559c-.144-.151-.416-.287-.807-.415l-1.157-.36c-.583-.183-1.014-.454-1.277-.813a1.902 1.902 0 0 1-.4-1.158c0-.335.073-.63.216-.886.144-.255.335-.479.575-.654.24-.184.51-.32.83-.415.32-.096.655-.136 1.006-.136.175 0 .359.008.535.032.183.024.35.056.518.088.16.04.312.08.455.127.144.048.256.096.336.144a.69.69 0 0 1 .24.2.43.43 0 0 1 .071.263v.375c0 .168-.064.256-.184.256a.83.83 0 0 1-.303-.096 3.652 3.652 0 0 0-1.532-.311c-.455 0-.815.071-1.062.223-.248.152-.375.383-.375.71 0 .224.08.416.24.567.159.152.454.304.877.44l1.134.358c.574.184.99.44 1.237.767.247.327.367.702.367 1.117 0 .343-.072.655-.207.926-.144.272-.336.511-.583.703-.248.2-.543.343-.886.447-.36.111-.734.167-1.142.167zM21.698 16.207c-2.626 1.94-6.442 2.969-9.722 2.969-4.598 0-8.74-1.7-11.87-4.526-.247-.223-.024-.527.272-.351 3.384 1.963 7.559 3.153 11.877 3.153 2.914 0 6.114-.607 9.06-1.852.439-.2.814.287.383.607zM22.792 14.961c-.336-.43-2.22-.207-3.074-.103-.255.032-.295-.192-.063-.36 1.5-1.053 3.967-.75 4.254-.399.287.36-.08 2.826-1.485 4.007-.215.184-.423.088-.327-.151.32-.79 1.03-2.57.695-2.994z"/>
+        </svg>
+        aws <span class="n" id="cnt-aws"></span>
+      </button>
+      <button class="tabbtn" data-tab="azure">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M0 8.877L2.247 5.91l8.405-3.416V.022l7.37 5.393L2.966 8.338v8.225L0 15.707zm24-4.45v14.651l-5.753 4.9-9.303-3.057v3.056l-5.978-7.416 15.057 1.798V5.415z"/>
+        </svg>
+        azure devops <span class="n" id="cnt-azure"></span>
+      </button>
+      <button class="tabbtn" data-tab="play">
+        <svg class="tab-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M3 4h18a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm3.3 4.3-1.4 1.4L7.2 12l-2.3 2.3 1.4 1.4L10 12zM12 15v2h6v-2z"/>
+        </svg>
+        playground <span class="n" id="cnt-play"></span>
       </button>
     </div>
     <div class="panels">
@@ -755,11 +857,23 @@ a { color: var(--accent); }
     { cat: "go", color: "cyan", text: "`go vet` detecta bugs reales (printf con argumentos mal tipados, mutex copiado por valor) que compilan sin error. Córrelo junto con `go build`, no es opcional." },
     { cat: "go", color: "cyan", text: "Toda variable en Go arranca con su 'zero value' (0, \"\", false, nil) en vez de quedar indefinida. Diseña tus structs para que el zero value ya sea un estado válido y usable." },
     { cat: "go", color: "cyan", text: "`net/http` de la librería estándar ya trae routing, middlewares (como funciones que envuelven `http.Handler`) y servidor HTTP/2. Para la mayoría de APIs no hace falta un framework — solo lo justifican necesidades específicas de rendimiento o ergonomía." },
-    { cat: "go", color: "cyan", text: "Siempre configura `ReadHeaderTimeout` (o `ReadTimeout`/`WriteTimeout`) en tu `http.Server{}`. Sin timeouts, un cliente lento puede dejar conexiones abiertas indefinidamente y agotar tu servidor (Slowloris)." }
+    { cat: "go", color: "cyan", text: "Siempre configura `ReadHeaderTimeout` (o `ReadTimeout`/`WriteTimeout`) en tu `http.Server{}`. Sin timeouts, un cliente lento puede dejar conexiones abiertas indefinidamente y agotar tu servidor (Slowloris)." },
+    { cat: "aws", color: "orange", text: "`aws sts get-caller-identity` es el `whoami` de AWS: te dice con qué cuenta y rol estás operando. Córrelo siempre antes de ejecutar algo destructivo — la mitad de los desastres son 'pensé que estaba en dev'." },
+    { cat: "aws", color: "orange", text: "`--query` (JMESPath) filtra el JSON del lado del cliente y `--output table` lo vuelve legible. Aprender cuatro expresiones JMESPath te ahorra pelear con `jq` en cada comando." },
+    { cat: "aws", color: "orange", text: "Usa perfiles (`--profile dev` o `export AWS_PROFILE=dev`) en vez de credenciales sueltas. Con `aws configure sso` ni siquiera guardas llaves de larga duración en disco." },
+    { cat: "aws", color: "orange", text: "Principio de mínimo privilegio en IAM: empieza sin permisos y agrega solo lo que el error `AccessDenied` te pida. `aws iam simulate-principal-policy` te deja probar una política sin ejecutar la acción real." },
+    { cat: "aws", color: "orange", text: "`aws logs tail /aws/lambda/mi-fn --follow` es un `tail -f` de CloudWatch Logs desde tu terminal. Evita abrir la consola web para depurar una Lambda." },
+    { cat: "aws", color: "orange", text: "El SDK de Go v2 usa la misma cadena de credenciales que la CLI: `config.LoadDefaultConfig(ctx)` lee variables de entorno, `~/.aws` y roles. Si la CLI funciona, tu código Go también." },
+    { cat: "azure", color: "azure", text: "Todo pipeline moderno de Azure DevOps vive en un `azure-pipelines.yml` dentro del repo. Versionar el pipeline junto al código significa que un PR puede cambiar ambos y se revisan juntos." },
+    { cat: "azure", color: "azure", text: "Configura una vez `az devops configure --defaults organization=... project=...` y te ahorras repetir `--org` y `--project` en cada comando de `az repos`, `az pipelines` y `az boards`." },
+    { cat: "azure", color: "azure", text: "Nunca pongas secretos en el YAML. Usa variable groups (o Key Vault enlazado) y márcalos como secretos: Azure DevOps los enmascara en los logs como `***`." },
+    { cat: "azure", color: "azure", text: "Divide el pipeline en `stages` → `jobs` → `steps`. Los jobs de un stage corren en paralelo salvo que uses `dependsOn`; eso es lo que te permite correr tests y lint a la vez." },
+    { cat: "azure", color: "azure", text: "Los `environments` con aprobaciones convierten un deploy a producción en un paso que espera visto bueno humano. Úsalos con `deployment` jobs en vez de un script suelto." },
+    { cat: "azure", color: "azure", text: "`echo \"##vso[task.setvariable variable=VERSION]1.2.3\"` crea una variable en runtime que los steps siguientes leen como `$(VERSION)`. Es el puente entre pasos de un pipeline." }
   ];
 
-  var catLabel = { git: "GIT", linux: "LINUX", docker: "DOCKER", sql: "SQL / POSTGRES", claude: "CLAUDE CODE", go: "GO" };
-  var catColorVar = { accent: "var(--accent)", amber: "var(--amber)", blue: "var(--blue)", violet: "var(--violet)", cyan: "var(--cyan)" };
+  var catLabel = { git: "GIT", linux: "LINUX", docker: "DOCKER", sql: "SQL / POSTGRES", claude: "CLAUDE CODE", go: "GO", aws: "AWS", azure: "AZURE DEVOPS" };
+  var catColorVar = { accent: "var(--accent)", amber: "var(--amber)", blue: "var(--blue)", violet: "var(--violet)", cyan: "var(--cyan)", orange: "var(--orange)", azure: "var(--azure)" };
 
   var tipIdx = Math.floor(Math.random() * TIPS.length);
   var tipTextEl = document.getElementById("tipText");
@@ -1267,6 +1381,156 @@ a { color: var(--accent); }
         ["client := &http.Client{Timeout: 10 * time.Second}", "Cliente HTTP con timeout explícito; el cliente por defecto (`http.Get`) no tiene límite y puede colgarse"]
       ]}
     ]
+    ,aws: [
+      { grp: "Configuración e identidad", items: [
+        ["aws configure", "Pide access key, secret, región y formato de salida; lo guarda en `~/.aws`"],
+        ["aws configure --profile dev", "Crea o edita un perfil con nombre, para separar cuentas/entornos"],
+        ["aws configure sso", "Configura login por SSO (IAM Identity Center); evita llaves de larga duración en disco"],
+        ["aws sso login --profile dev", "Abre el navegador para renovar la sesión SSO del perfil"],
+        ["aws sts get-caller-identity", "Muestra cuenta, usuario/rol y ARN con los que operas; el `whoami` de AWS"],
+        ["aws configure list", "Muestra de dónde sale cada valor activo (env, archivo, perfil) — útil cuando 'no usa mi perfil'"],
+        ["export AWS_PROFILE=dev", "Fija el perfil por defecto de la sesión de shell sin repetir `--profile`"],
+        ["aws <servicio> help", "Ayuda de un servicio o comando directamente en la terminal (`aws s3 help`)"]
+      ]},
+      { grp: "Salida y filtrado", items: [
+        ["--output table", "Formatea la respuesta como tabla legible (otras: `json`, `yaml`, `text`)"],
+        ["--query 'Reservations[].Instances[].InstanceId'", "Filtra el JSON del lado del cliente con JMESPath, sin necesitar `jq`"],
+        ["--query \"Instances[?State.Name=='running']\"", "Filtra elementos de una lista por condición dentro de JMESPath"],
+        ["--region us-east-1", "Sobrescribe la región para un solo comando"],
+        ["--no-cli-pager", "Desactiva el paginador (`less`) para que el output vaya directo a la terminal o a un pipe"],
+        ["--debug", "Muestra las llamadas HTTP y de credenciales; el primer recurso cuando algo falla sin explicación"],
+        ["--dry-run", "En EC2 y otros, valida permisos y parámetros sin ejecutar la acción realmente"]
+      ]},
+      { grp: "S3", items: [
+        ["aws s3 ls", "Lista los buckets de la cuenta"],
+        ["aws s3 ls s3://bucket/prefijo/ --recursive --human-readable", "Lista objetos de forma recursiva con tamaños legibles"],
+        ["aws s3 mb s3://bucket", "Crea un bucket (el nombre debe ser único globalmente)"],
+        ["aws s3 cp archivo.txt s3://bucket/", "Sube un archivo; invierte los argumentos para descargar"],
+        ["aws s3 sync ./dist s3://bucket/ --delete", "Sincroniza una carpeta con un bucket; `--delete` borra lo que ya no existe en origen"],
+        ["aws s3 rm s3://bucket/prefijo/ --recursive", "Borra todos los objetos bajo un prefijo; confirma el prefijo antes de ejecutar"],
+        ["aws s3 presign s3://bucket/key --expires-in 3600", "Genera una URL temporal para compartir un objeto privado sin dar credenciales"],
+        ["aws s3api list-objects-v2 --bucket b --prefix p", "Interfaz de bajo nivel de S3: más control y salida JSON para filtrar con `--query`"]
+      ]},
+      { grp: "EC2", items: [
+        ["aws ec2 describe-instances --query 'Reservations[].Instances[].[InstanceId,State.Name]' --output table", "Lista instancias con su estado en formato tabla"],
+        ["aws ec2 start-instances --instance-ids i-0abc", "Arranca una instancia detenida"],
+        ["aws ec2 stop-instances --instance-ids i-0abc", "Detiene una instancia (no cobra cómputo, sí el disco)"],
+        ["aws ec2 terminate-instances --instance-ids i-0abc", "Elimina la instancia de forma permanente; no se puede deshacer"],
+        ["aws ec2 run-instances --image-id ami-xxx --instance-type t3.micro --key-name mi-key", "Lanza una instancia nueva a partir de una AMI"],
+        ["aws ec2 describe-security-groups", "Lista los security groups y sus reglas de entrada/salida"],
+        ["aws ec2 describe-images --owners self", "Lista las AMIs propias de tu cuenta"]
+      ]},
+      { grp: "IAM", items: [
+        ["aws iam list-users", "Lista los usuarios IAM de la cuenta"],
+        ["aws iam list-roles --query 'Roles[].RoleName'", "Lista solo los nombres de los roles"],
+        ["aws iam create-role --role-name R --assume-role-policy-document file://trust.json", "Crea un rol con su trust policy (quién puede asumirlo)"],
+        ["aws iam attach-role-policy --role-name R --policy-arn arn:aws:iam::aws:policy/...", "Adjunta una política administrada a un rol"],
+        ["aws iam list-attached-role-policies --role-name R", "Muestra qué políticas tiene adjuntas un rol"],
+        ["aws sts assume-role --role-arn ARN --role-session-name sesion", "Obtiene credenciales temporales de un rol; devuelve key, secret y token"],
+        ["aws iam simulate-principal-policy --policy-source-arn ARN --action-names s3:GetObject", "Prueba si un principal tendría permiso para una acción, sin ejecutarla"]
+      ]},
+      { grp: "Lambda y CloudWatch Logs", items: [
+        ["aws lambda list-functions --query 'Functions[].FunctionName'", "Lista los nombres de las funciones Lambda"],
+        ["aws lambda invoke --function-name fn salida.json", "Invoca una función y guarda la respuesta en `salida.json`"],
+        ["aws lambda update-function-code --function-name fn --zip-file fileb://function.zip", "Sube un nuevo paquete de código a una función existente"],
+        ["aws lambda get-function-configuration --function-name fn", "Muestra runtime, memoria, timeout y variables de entorno"],
+        ["aws logs tail /aws/lambda/fn --follow", "Sigue los logs en vivo desde la terminal, como `tail -f`"],
+        ["aws logs tail /aws/lambda/fn --since 1h --filter-pattern ERROR", "Muestra solo los errores de la última hora"],
+        ["aws logs describe-log-groups", "Lista los grupos de logs disponibles"],
+        ["aws cloudwatch describe-alarms --state-value ALARM", "Lista las alarmas que están disparadas ahora mismo"]
+      ]},
+      { grp: "Contenedores (ECR / ECS)", items: [
+        ["aws ecr create-repository --repository-name app", "Crea un repositorio de imágenes en ECR"],
+        ["aws ecr get-login-password | docker login --username AWS --password-stdin CUENTA.dkr.ecr.REGION.amazonaws.com", "Autentica Docker contra ECR; el token dura 12 horas"],
+        ["docker push CUENTA.dkr.ecr.REGION.amazonaws.com/app:tag", "Sube una imagen etiquetada con la URI completa del repositorio"],
+        ["aws ecs list-clusters", "Lista los clusters ECS"],
+        ["aws ecs list-services --cluster c", "Lista los servicios de un cluster"],
+        ["aws ecs update-service --cluster c --service s --force-new-deployment", "Redespliega el servicio con la imagen actual; útil tras empujar un tag `latest`"],
+        ["aws ecs describe-services --cluster c --services s", "Muestra estado, tareas deseadas vs. corriendo y eventos de despliegue"]
+      ]},
+      { grp: "Secretos, parámetros y datos", items: [
+        ["aws secretsmanager get-secret-value --secret-id nombre --query SecretString --output text", "Lee el valor de un secreto en texto plano"],
+        ["aws ssm get-parameter --name /app/clave --with-decryption", "Lee un parámetro de SSM Parameter Store; `--with-decryption` para los `SecureString`"],
+        ["aws ssm put-parameter --name /app/clave --value v --type SecureString", "Guarda un parámetro cifrado"],
+        ["aws rds describe-db-instances --query 'DBInstances[].[DBInstanceIdentifier,DBInstanceStatus]'", "Lista las bases de datos RDS y su estado"],
+        ["aws dynamodb list-tables", "Lista las tablas de DynamoDB"],
+        ["aws sqs list-queues", "Lista las colas SQS"]
+      ]},
+      { grp: "CloudFormation", items: [
+        ["aws cloudformation validate-template --template-body file://t.yaml", "Valida la sintaxis de una plantilla antes de desplegarla"],
+        ["aws cloudformation deploy --template-file t.yaml --stack-name s --capabilities CAPABILITY_IAM", "Crea o actualiza un stack con change set; pide la capability si crea recursos IAM"],
+        ["aws cloudformation describe-stack-events --stack-name s", "Historial de eventos del stack; ahí aparece la causa de un despliegue fallido"],
+        ["aws cloudformation describe-stacks --stack-name s --query 'Stacks[0].Outputs'", "Lee los outputs de un stack (URLs, ARNs, etc.)"],
+        ["aws cloudformation delete-stack --stack-name s", "Elimina el stack y todos los recursos que creó"]
+      ]}
+    ]
+    ,azure: [
+      { grp: "Setup de la CLI", items: [
+        ["az login", "Inicia sesión en Azure desde el navegador"],
+        ["az extension add --name azure-devops", "Instala la extensión que agrega `az devops`, `az repos`, `az pipelines` y `az boards`"],
+        ["az devops configure --defaults organization=https://dev.azure.com/ORG project=PROYECTO", "Fija organización y proyecto por defecto para no repetir `--org`/`--project`"],
+        ["az devops configure --list", "Muestra los valores por defecto configurados"],
+        ["az devops login --organization https://dev.azure.com/ORG", "Inicia sesión con un Personal Access Token (PAT)"],
+        ["az devops project list", "Lista los proyectos de la organización"]
+      ]},
+      { grp: "Repos y Pull Requests", items: [
+        ["az repos list --output table", "Lista los repositorios del proyecto"],
+        ["az repos pr create --title \"T\" --source-branch feature --target-branch main", "Abre un PR; agrega `--reviewers` y `--work-items` para vincular"],
+        ["az repos pr list --status active", "Lista los PRs abiertos del proyecto"],
+        ["az repos pr show --id 42", "Muestra el detalle de un PR"],
+        ["az repos pr set-vote --id 42 --vote approve", "Vota un PR (`approve`, `wait-for-author`, `reject`, `reset`)"],
+        ["az repos pr update --id 42 --status completed", "Completa (mergea) el PR"],
+        ["az repos pr update --id 42 --auto-complete true", "Completa el PR solo cuando se cumplan las políticas de rama"]
+      ]},
+      { grp: "Pipelines (CLI)", items: [
+        ["az pipelines list --output table", "Lista los pipelines definidos en el proyecto"],
+        ["az pipelines run --name mi-pipeline --branch main", "Dispara una ejecución del pipeline sobre una rama"],
+        ["az pipelines run --name p --variables ENTORNO=dev", "Ejecuta pasando variables en runtime"],
+        ["az pipelines runs list --pipeline-ids 12 --top 5", "Muestra las últimas ejecuciones de un pipeline"],
+        ["az pipelines runs show --id 345", "Detalle de una ejecución: estado, resultado y rama"],
+        ["az pipelines variable create --pipeline-name p --name API_KEY --value x --secret true", "Crea una variable del pipeline marcada como secreta"],
+        ["az pipelines variable-group list", "Lista los variable groups disponibles"]
+      ]},
+      { grp: "Boards (work items)", items: [
+        ["az boards work-item create --title \"T\" --type Bug", "Crea un work item (`Bug`, `Task`, `User Story`, etc.)"],
+        ["az boards work-item show --id 123", "Muestra el detalle de un work item"],
+        ["az boards work-item update --id 123 --state Active", "Cambia el estado de un work item"],
+        ["az boards work-item update --id 123 --assigned-to usuario@correo.com", "Reasigna un work item"],
+        ["az boards query --wiql \"SELECT [System.Id],[System.Title] FROM WorkItems WHERE [System.State]='Active'\"", "Consulta work items con WIQL, el lenguaje de consultas de Boards"]
+      ]},
+      { grp: "YAML: estructura básica", items: [
+        ["trigger: [main]", "Dispara el pipeline automáticamente en cada push a `main`"],
+        ["pr: [main]", "Dispara el pipeline al abrir o actualizar PRs hacia `main`"],
+        ["pool: { vmImage: ubuntu-latest }", "Agente alojado por Microsoft donde corre el job (`windows-latest`, `macos-latest`)"],
+        ["stages: → jobs: → steps:", "Jerarquía del pipeline: stages en orden, jobs en paralelo dentro de cada stage, steps en secuencia"],
+        ["- script: go test ./...", "Step que ejecuta un comando de shell"],
+        ["- task: GoTool@0", "Step que usa una tarea predefinida del marketplace con sus `inputs:`"],
+        ["- bash: echo $(Build.BuildId)", "Step de bash explícito; en YAML las variables se leen con `$(nombre)`"],
+        ["displayName: 'Compilar'", "Nombre legible del step o job en la UI del pipeline"],
+        ["dependsOn: Build", "Hace que un job/stage espere a otro; sin esto, los jobs corren en paralelo"],
+        ["condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))", "Ejecuta el step solo si lo anterior pasó y estás en `main`"],
+        ["- template: pasos/build.yml", "Reutiliza un fragmento de YAML desde otro archivo; combínalo con `parameters:`"]
+      ]},
+      { grp: "Variables y comandos de logging", items: [
+        ["variables: { GO_VERSION: '1.22' }", "Define variables del pipeline a nivel de archivo, stage o job"],
+        ["- group: mi-variable-group", "Importa un variable group (con secretos o enlazado a Key Vault)"],
+        ["$(Build.BuildId)", "Variable predefinida: ID numérico único de la ejecución"],
+        ["$(Build.SourceBranchName)", "Variable predefinida: nombre corto de la rama que disparó el build"],
+        ["$(Build.SourcesDirectory)", "Variable predefinida: carpeta donde el agente descargó el código"],
+        ["$(System.AccessToken)", "Token del propio pipeline para llamar a la API de Azure DevOps; hay que pasarlo explícito a los scripts"],
+        ["echo \"##vso[task.setvariable variable=VERSION]1.2.3\"", "Crea una variable en runtime; los steps siguientes la leen como `$(VERSION)`"],
+        ["echo \"##vso[task.logissue type=error]mensaje\"", "Registra un error visible en el resumen del pipeline"],
+        ["echo \"##[group]Título\"", "Agrupa líneas de log en una sección colapsable"]
+      ]},
+      { grp: "Despliegues y artefactos", items: [
+        ["- publish: $(Build.ArtifactStagingDirectory)", "Publica archivos como artefacto del pipeline para stages posteriores"],
+        ["- download: current", "Descarga los artefactos publicados en esta ejecución"],
+        ["- deployment: DeployProd", "Job de tipo despliegue; asociado a un `environment`, permite aprobaciones y registro de historial"],
+        ["environment: produccion", "Vincula el deployment a un environment; ahí se configuran aprobaciones y checks"],
+        ["strategy: { runOnce: { deploy: { steps: [] } } }", "Estrategia de despliegue más simple: ejecuta los steps una sola vez"],
+        ["- task: AzureWebApp@1", "Despliega a un Azure App Service; requiere una service connection con `azureSubscription:`"]
+      ]}
+    ]
   };
 
   var tabbar = document.getElementById("tabbar");
@@ -1308,6 +1572,14 @@ a { color: var(--accent); }
 
         row.appendChild(code);
         row.appendChild(desc);
+
+        var tryBtn = document.createElement("button");
+        tryBtn.type = "button";
+        tryBtn.className = "try-btn";
+        tryBtn.textContent = "▶ probar";
+        tryBtn.title = "Copiar este comando al playground";
+        tryBtn.dataset.cmd = pair[0];
+        row.appendChild(tryBtn);
         list.appendChild(row);
       });
 
@@ -1336,17 +1608,894 @@ a { color: var(--accent); }
     });
   }
 
+  var searchRow = document.querySelector(".search-row");
+
+  function activateTab(key) {
+    Array.prototype.forEach.call(tabbar.children, function (b) {
+      b.classList.toggle("active", b.dataset.tab === key);
+    });
+    currentTab = key;
+    filterInput.value = "";
+    if (key === "play") {
+      searchRow.style.display = "none";
+      var pg = getPlayground();
+      panelHost.innerHTML = "";
+      panelHost.appendChild(pg.el);
+      pg.focus();
+    } else {
+      searchRow.style.display = "";
+      renderPanel(key);
+    }
+  }
+
   tabbar.addEventListener("click", function (e) {
     var btn = e.target.closest(".tabbtn");
     if (!btn) return;
-    Array.prototype.forEach.call(tabbar.children, function (b) { b.classList.remove("active"); });
-    btn.classList.add("active");
-    currentTab = btn.dataset.tab;
-    filterInput.value = "";
-    renderPanel(currentTab);
+    activateTab(btn.dataset.tab);
+  });
+
+  panelHost.addEventListener("click", function (e) {
+    var btn = e.target.closest(".try-btn");
+    if (!btn) return;
+    activateTab("play");
+    getPlayground().prefill(btn.dataset.cmd);
   });
 
   filterInput.addEventListener("input", applyFilter);
+
+  /* ---------------- PLAYGROUND (shell simulada) ----------------
+     Nada se ejecuta de verdad: es un intérprete en JS con filesystem, git,
+     aws y az de juguete. Las salidas están simplificadas a propósito. */
+  var HOME = "/home/dixon";
+  var PG = null;
+
+  var MISSIONS = [
+    { t: "Tu primera carpeta", d: "Crea una carpeta `proyecto`, entra en ella y crea un README.md con `echo`.",
+      h: "mkdir proyecto  →  cd proyecto  →  echo \"# Mi proyecto\" > README.md",
+      ok: function (s) { return !!s.fs[HOME + "/proyecto/README.md"]; } },
+    { t: "Primer commit", d: "Dentro de `proyecto`, inicializa git y haz tu primer commit.",
+      h: "git init  →  git add .  →  git commit -m \"primer commit\"",
+      ok: function (s) { return s.git.logs[s.git.branch].length > 0; } },
+    { t: "Rama de trabajo", d: "Crea y cámbiate a una rama llamada `feature/login`.",
+      h: "git switch -c feature/login",
+      ok: function (s) { return s.git.branch === "feature/login"; } },
+    { t: "¿Quién soy en AWS?", d: "Averigua con qué identidad estás operando en AWS.",
+      h: "aws sts get-caller-identity",
+      ok: function (s) { return !!s.ran.sts; } },
+    { t: "Sube algo a S3", d: "Crea un bucket y sube tu README.md.",
+      h: "aws s3 mb s3://dixon-demo-bucket  →  aws s3 cp README.md s3://dixon-demo-bucket/",
+      ok: function (s) { return Object.keys(s.aws.buckets).some(function (b) { return Object.keys(s.aws.buckets[b]).length > 0; }); } },
+    { t: "Lambda a la vista", d: "Invoca la función `procesar-tickets` y guarda la respuesta en salida.json.",
+      h: "aws lambda invoke --function-name procesar-tickets salida.json",
+      ok: function (s) { return !!s.ran.lambda; } },
+    { t: "Azure DevOps listo", d: "Inicia sesión, instala la extensión, configura organización y proyecto, y lanza el pipeline `build-api`.",
+      h: "az login  →  az extension add --name azure-devops  →  az devops configure --defaults organization=https://dev.azure.com/linktic project=helpdesk  →  az pipelines run --name build-api",
+      ok: function (s) { return s.az.runs.length > 0; } },
+    { t: "Abre y completa un PR", d: "Crea un Pull Request desde `feature/login` hacia `main` y complétalo.",
+      h: "az repos pr create --title \"Login\" --source-branch feature/login --target-branch main  →  az repos pr update --id 1 --status completed",
+      ok: function (s) { return s.az.prs.some(function (p) { return p.status === "completed"; }); } }
+  ];
+
+  function createPlayground() {
+    var st, mIdx, histPos = 0, prevCwd = null;
+
+    var el = document.createElement("div");
+    el.className = "pg";
+    var missionEl = document.createElement("div");
+    missionEl.className = "pg-mission";
+    var screen = document.createElement("div");
+    screen.className = "pg-screen";
+    screen.setAttribute("role", "log");
+    var outEl = document.createElement("div");
+    var inLine = document.createElement("div");
+    inLine.className = "pg-inline";
+    var promptEl = document.createElement("span");
+    promptEl.className = "pg-prompt";
+    var input = document.createElement("input");
+    input.type = "text";
+    input.className = "pg-input";
+    input.autocomplete = "off";
+    input.spellcheck = false;
+    input.setAttribute("aria-label", "Terminal simulada");
+    inLine.appendChild(promptEl);
+    inLine.appendChild(input);
+    screen.appendChild(outEl);
+    screen.appendChild(inLine);
+    el.appendChild(missionEl);
+    el.appendChild(screen);
+
+    /* ---- estado ---- */
+    function freshState() {
+      var fs = {};
+      fs["/"] = { t: "d" };
+      fs["/home"] = { t: "d" };
+      fs[HOME] = { t: "d" };
+      fs[HOME + "/notas.txt"] = { t: "f", c: "recordar: practicar un poco cada día\n" };
+      return {
+        cwd: HOME, fs: fs, hist: [], ran: {},
+        git: { root: null, branch: "main", logs: { main: [] }, index: {}, committed: {} },
+        aws: { buckets: {}, instances: [{ id: "i-0a1b2c3d4e5f60718", type: "t3.micro", state: "running" }] },
+        az: { login: false, ext: false, org: null, project: null, prs: [], runs: [], items: [], runSeq: 100 }
+      };
+    }
+
+    /* ---- utilidades de rutas ---- */
+    function norm(p) {
+      var parts = [];
+      p.split("/").forEach(function (x) {
+        if (!x || x === ".") return;
+        if (x === "..") parts.pop(); else parts.push(x);
+      });
+      return "/" + parts.join("/");
+    }
+    function resolve(p) {
+      if (!p || p === "~") return HOME;
+      if (p.indexOf("~/") === 0) p = HOME + p.slice(1);
+      if (p.charAt(0) !== "/") p = st.cwd + "/" + p;
+      return norm(p);
+    }
+    function parentOf(p) { return p.slice(0, p.lastIndexOf("/")) || "/"; }
+    function baseOf(p) { return p.slice(p.lastIndexOf("/") + 1); }
+    function kids(dir) {
+      return Object.keys(st.fs).filter(function (k) { return k !== "/" && parentOf(k) === dir; }).sort();
+    }
+    function under(dir) {
+      return Object.keys(st.fs).filter(function (k) { return k.indexOf(dir === "/" ? "/" : dir + "/") === 0; }).sort();
+    }
+    function showPath(p) {
+      if (p === HOME) return "~";
+      return p.indexOf(HOME + "/") === 0 ? "~" + p.slice(HOME.length) : p;
+    }
+    function p2(n) { return n < 10 ? "0" + n : "" + n; }
+    function nowStr() {
+      var d = new Date();
+      return d.getFullYear() + "-" + p2(d.getMonth() + 1) + "-" + p2(d.getDate()) + " " + p2(d.getHours()) + ":" + p2(d.getMinutes()) + ":" + p2(d.getSeconds());
+    }
+    function hex(n) {
+      var s = "";
+      while (s.length < n) s += Math.floor(Math.random() * 16).toString(16);
+      return s;
+    }
+
+    /* ---- salida ---- */
+    function print(parts, cls) {
+      var line = document.createElement("div");
+      line.className = "pg-line" + (cls ? " " + cls : "");
+      if (typeof parts === "string") {
+        line.textContent = parts;
+      } else {
+        parts.forEach(function (seg) {
+          var sp = document.createElement("span");
+          sp.textContent = seg[0];
+          if (seg[1]) sp.className = seg[1];
+          line.appendChild(sp);
+        });
+      }
+      outEl.appendChild(line);
+    }
+    function block(text, cls) { text.split("\n").forEach(function (l) { print(l, cls); }); }
+    function err(msg) { print(msg, "pg-err"); }
+    function note(msg) { print(msg, "pg-dim"); }
+    function json(obj) { block(JSON.stringify(obj, null, 4)); }
+    function table(rows, cols) {
+      var widths = cols.map(function (c) {
+        return rows.reduce(function (w, r) { return Math.max(w, String(r[c[1]]).length); }, c[0].length);
+      });
+      function fmt(vals) { return vals.map(function (v, i) { return String(v) + new Array(widths[i] - String(v).length + 1).join(" "); }).join("  ").replace(/\s+$/, ""); }
+      print(fmt(cols.map(function (c) { return c[0]; })), "pg-dim");
+      print(widths.map(function (w) { return new Array(w + 1).join("-"); }).join("  "), "pg-dim");
+      rows.forEach(function (r) { print(fmt(cols.map(function (c) { return r[c[1]]; }))); });
+    }
+    function listOut(flags, rows, cols) {
+      if (flags.output === "table") table(rows, cols); else json(rows);
+    }
+
+    /* ---- parser ---- */
+    function tokenize(s) {
+      var re = /"([^"]*)"|'([^']*)'|(\S+)/g, m, out = [];
+      while ((m = re.exec(s))) out.push(m[1] !== undefined ? m[1] : (m[2] !== undefined ? m[2] : m[3]));
+      return out;
+    }
+    var BOOL = { "recursive": 1, "human-readable": 1, "dry-run": 1, "no-cli-pager": 1, "debug": 1, "list": 1, "force-new-deployment": 1 };
+    function parseArgs(args) {
+      var pos = [], f = {};
+      for (var i = 0; i < args.length; i++) {
+        var a = args[i];
+        if (a.indexOf("--") === 0) {
+          var k = a.slice(2), eq = k.indexOf("=");
+          if (eq > 0) f[k.slice(0, eq)] = k.slice(eq + 1);
+          else if (BOOL[k] || i + 1 >= args.length || args[i + 1].indexOf("--") === 0) f[k] = true;
+          else f[k] = args[++i];
+        } else pos.push(a);
+      }
+      return { pos: pos, f: f };
+    }
+    function cleanOutputNote(f) {
+      if (f.query || f.output) note("(simulado) --query y --output se ignoran aquí: mostrando la salida completa.");
+    }
+
+    /* ---- comandos básicos ---- */
+    var cmd = {};
+
+    cmd.help = function () {
+      block([
+        "Shell simulada — nada se ejecuta de verdad, es un juguete para practicar.",
+        "",
+        "  básicos : ls [-la] · cd · pwd · cat · mkdir [-p] · touch · echo \"x\" > archivo · rm [-r] · clear · history",
+        "  git     : init · status · add · commit -m · log [--oneline] · branch · switch [-c] · checkout [-b]",
+        "  aws     : sts · s3 (ls mb rb cp sync rm presign) · ec2 · lambda · iam · logs tail",
+        "  az      : login · extension add · devops configure · repos list · repos pr · pipelines · boards work-item",
+        "",
+        "  mision  : muestra la misión actual      reset : reinicia todo",
+        "  Tab autocompleta · ↑/↓ historial · Ctrl+L limpia · salidas simplificadas"
+      ].join("\n"));
+    };
+    cmd.clear = function () { outEl.innerHTML = ""; };
+    cmd.pwd = function () { print(st.cwd); };
+    cmd.whoami = function () { print("dixon"); };
+    cmd.date = function () { print(new Date().toString()); };
+    cmd.history = function () {
+      st.hist.forEach(function (h, i) { print((i + 1 < 10 ? "  " : " ") + (i + 1) + "  " + h); });
+    };
+    cmd.reset = function () { start(); };
+    cmd.mision = function () { showMissionDetail(); };
+
+    cmd.ls = function (args) {
+      var flags = "", paths = [];
+      args.forEach(function (a) { if (a.charAt(0) === "-") flags += a.slice(1); else paths.push(a); });
+      var long = flags.indexOf("l") >= 0, all = flags.indexOf("a") >= 0;
+      var target = resolve(paths[0] || ".");
+      var node = st.fs[target];
+      if (!node) return err("ls: no se puede acceder a '" + (paths[0] || ".") + "': No existe el archivo o directorio");
+      if (node.t === "f") return print(baseOf(target));
+      var names = kids(target).filter(function (k) { return all || baseOf(k).charAt(0) !== "."; });
+      if (long) {
+        print("total " + names.length * 4, "pg-dim");
+        names.forEach(function (k) {
+          var isDir = st.fs[k].t === "d", size = isDir ? 4096 : st.fs[k].c.length;
+          var sz = String(size); sz = new Array(Math.max(0, 6 - sz.length)).join(" ") + sz;
+          print([[(isDir ? "drwxr-xr-x" : "-rw-r--r--") + " 1 dixon dixon " + sz + " oct 20 10:00 ", "pg-dim"], [baseOf(k), isDir ? "pg-dir" : ""]]);
+        });
+      } else if (names.length) {
+        var segs = [];
+        names.forEach(function (k, i) {
+          if (i) segs.push(["  "]);
+          segs.push([baseOf(k), st.fs[k].t === "d" ? "pg-dir" : ""]);
+        });
+        print(segs);
+      }
+    };
+
+    cmd.cd = function (args) {
+      var target = args[0] === "-" ? (prevCwd || HOME) : resolve(args[0]);
+      var node = st.fs[target];
+      if (!node) return err("cd: " + args[0] + ": No existe el archivo o directorio");
+      if (node.t !== "d") return err("cd: " + args[0] + ": No es un directorio");
+      prevCwd = st.cwd;
+      st.cwd = target;
+    };
+
+    cmd.cat = function (args) {
+      if (!args.length) return err("cat: falta el nombre del archivo");
+      args.forEach(function (a) {
+        var node = st.fs[resolve(a)];
+        if (!node) return err("cat: " + a + ": No existe el archivo o directorio");
+        if (node.t === "d") return err("cat: " + a + ": Es un directorio");
+        if (node.c) block(node.c.replace(/\n$/, ""));
+      });
+    };
+
+    cmd.mkdir = function (args) {
+      var p = false, names = [];
+      args.forEach(function (a) { if (a === "-p") p = true; else names.push(a); });
+      if (!names.length) return err("mkdir: falta un operando");
+      names.forEach(function (n) {
+        var path = resolve(n);
+        if (st.fs[path]) return p ? null : err("mkdir: no se puede crear el directorio '" + n + "': El archivo ya existe");
+        if (!p && !st.fs[parentOf(path)]) return err("mkdir: no se puede crear el directorio '" + n + "': No existe el archivo o directorio");
+        var cur = "";
+        path.split("/").filter(Boolean).forEach(function (seg) {
+          cur += "/" + seg;
+          if (!st.fs[cur]) st.fs[cur] = { t: "d" };
+        });
+      });
+    };
+
+    cmd.touch = function (args) {
+      if (!args.length) return err("touch: falta el operando de archivo");
+      args.forEach(function (n) {
+        var path = resolve(n);
+        if (st.fs[path]) return;
+        if (!st.fs[parentOf(path)]) return err("touch: no se puede hacer touch a '" + n + "': No existe el archivo o directorio");
+        st.fs[path] = { t: "f", c: "" };
+      });
+    };
+
+    cmd.rm = function (args) {
+      var flags = "", names = [];
+      args.forEach(function (a) { if (a.charAt(0) === "-") flags += a.slice(1); else names.push(a); });
+      var rec = /r|R/.test(flags), force = flags.indexOf("f") >= 0;
+      if (!names.length) return err("rm: falta un operando");
+      names.forEach(function (n) {
+        var path = resolve(n), node = st.fs[path];
+        if (!node) return force ? null : err("rm: no se puede borrar '" + n + "': No existe el archivo o directorio");
+        if (node.t === "d" && !rec) return err("rm: no se puede borrar '" + n + "': Es un directorio");
+        if (path === HOME || path === "/home" || path === "/") return err("rm: operación denegada sobre '" + n + "'");
+        under(path).forEach(function (k) { delete st.fs[k]; });
+        delete st.fs[path];
+        if (st.cwd === path || st.cwd.indexOf(path + "/") === 0) st.cwd = parentOf(path);
+      });
+    };
+
+    cmd.echo = function (args) { print(args.join(" ")); };
+
+    /* ---- git ---- */
+    function inRepo() {
+      var g = st.git;
+      return g.root && (st.cwd === g.root || st.cwd.indexOf(g.root + "/") === 0);
+    }
+    function repoFiles() {
+      var g = st.git;
+      return under(g.root).filter(function (k) {
+        return st.fs[k].t === "f" && k.indexOf(g.root + "/.git") !== 0;
+      });
+    }
+    function rel(p) { return p.slice(st.git.root.length + 1); }
+
+    cmd.git = function (args) {
+      var sub = args[0], g = st.git, rest = args.slice(1);
+      if (!sub) return note("uso: git <comando>   (simulados: init status add commit log branch switch checkout)");
+      if (sub === "init") {
+        if (g.root && st.cwd === g.root) return print("Reinicializado el repositorio Git existente en " + g.root + "/.git/");
+        g.root = st.cwd; g.index = {}; g.committed = {}; g.branch = "main"; g.logs = { main: [] };
+        st.fs[st.cwd + "/.git"] = { t: "d" };
+        return print("Inicializado repositorio Git vacío en " + st.cwd + "/.git/");
+      }
+      if (!inRepo()) return err("fatal: no es un repositorio git (ni ninguno de los directorios superiores): .git");
+
+      if (sub === "status") {
+        var files = repoFiles(), staged = [], modified = [], untracked = [];
+        files.forEach(function (f) {
+          var c = st.fs[f].c, inIdx = g.index.hasOwnProperty(f), inCom = g.committed.hasOwnProperty(f);
+          if (inIdx && g.index[f] !== g.committed[f]) staged.push([f, inCom ? "modificado:     " : "nuevo archivo:   "]);
+          if ((inIdx || inCom) && c !== (inIdx ? g.index[f] : g.committed[f])) modified.push(f);
+          if (!inIdx && !inCom) untracked.push(f);
+        });
+        print("En la rama " + g.branch);
+        if (!g.logs[g.branch].length) { print(""); print("No hay commits todavía"); }
+        if (staged.length) {
+          print(""); print("Cambios a ser confirmados:");
+          print("  (usa \"git restore --staged <archivo>...\" para sacar del stage)", "pg-dim");
+          staged.forEach(function (s) { print([["\t" + s[1] + rel(s[0]), "pg-ok"]]); });
+        }
+        if (modified.length) {
+          print(""); print("Cambios no rastreados para el commit:");
+          print("  (usa \"git add <archivo>...\" para actualizar lo que se confirmará)", "pg-dim");
+          modified.forEach(function (f) { print([["\tmodificado:     " + rel(f), "pg-err"]]); });
+        }
+        if (untracked.length) {
+          print(""); print("Archivos sin seguimiento:");
+          print("  (usa \"git add <archivo>...\" para incluirlo en lo que se va a confirmar)", "pg-dim");
+          untracked.forEach(function (f) { print([["\t" + rel(f), "pg-err"]]); });
+        }
+        if (!staged.length && !modified.length && !untracked.length) {
+          print("");
+          print(g.logs[g.branch].length ? "nada para hacer commit, el árbol de trabajo está limpio" : "no hay nada para confirmar (crea/copia archivos y usa \"git add\" para hacerles seguimiento)");
+        } else if (!staged.length) {
+          print(""); print("no hay cambios agregados al commit (usa \"git add\")");
+        }
+        return;
+      }
+
+      if (sub === "add") {
+        if (!rest.length) return err("No se especificó nada, no se agregó nada. ¿Quizás quisiste decir 'git add .'?");
+        rest.forEach(function (a) {
+          var path = resolve(a), node = st.fs[path];
+          if (!node) return err("fatal: la ruta '" + a + "' no coincide con ningún archivo");
+          var targets = node.t === "d" ? under(path).filter(function (k) { return st.fs[k].t === "f" && k.indexOf(g.root + "/.git") !== 0; }) : [path];
+          targets.forEach(function (f) { g.index[f] = st.fs[f].c; });
+        });
+        return;
+      }
+
+      if (sub === "commit") {
+        var mi = rest.indexOf("-m"), ami = rest.indexOf("-am"), all = ami >= 0;
+        var at = mi >= 0 ? mi : ami, msg = at >= 0 ? rest[at + 1] : null;
+        if (!msg) return err("Abortando el commit por mensaje vacío. Usa: git commit -m \"mensaje\"");
+        if (all) Object.keys(g.committed).forEach(function (f) { if (st.fs[f]) g.index[f] = st.fs[f].c; });
+        var changed = Object.keys(g.index).filter(function (f) { return g.index[f] !== g.committed[f]; });
+        if (!changed.length) return print("nada para hacer commit, el árbol de trabajo está limpio");
+        var first = !g.logs[g.branch].length;
+        changed.forEach(function (f) { g.committed[f] = g.index[f]; });
+        g.index = {};
+        var hash = hex(7);
+        g.logs[g.branch].unshift({ h: hash, m: msg });
+        print("[" + g.branch + (first ? " (commit raíz) " : " ") + hash + "] " + msg);
+        return print(" " + changed.length + " archivo(s) cambiado(s)");
+      }
+
+      if (sub === "log") {
+        var log = g.logs[g.branch];
+        if (!log.length) return err("fatal: tu rama actual '" + g.branch + "' todavía no tiene commits");
+        log.forEach(function (c) {
+          if (rest.indexOf("--oneline") >= 0) return print([[c.h + " ", "pg-warn"], [c.m]]);
+          print("commit " + c.h + "0123456789abcdef0123456789abcd", "pg-warn");
+          print("Author: Dixon <dixon@ejemplo.com>"); print("Date:   " + new Date().toString());
+          print(""); print("    " + c.m); print("");
+        });
+        return;
+      }
+
+      if (sub === "branch") {
+        if (rest[0] && rest[0].charAt(0) !== "-") {
+          if (g.logs[rest[0]]) return err("fatal: la rama '" + rest[0] + "' ya existe");
+          g.logs[rest[0]] = g.logs[g.branch].slice();
+          return;
+        }
+        Object.keys(g.logs).sort().forEach(function (b) {
+          print(b === g.branch ? [["* " + b, "pg-ok"]] : "  " + b);
+        });
+        return;
+      }
+
+      if (sub === "switch" || sub === "checkout") {
+        var create = rest[0] === "-c" || rest[0] === "-b";
+        var name = create ? rest[1] : rest[0];
+        if (!name) return err("fatal: falta el nombre de la rama");
+        if (create) {
+          if (g.logs[name]) return err("fatal: ya existe una rama llamada '" + name + "'");
+          g.logs[name] = g.logs[g.branch].slice();
+          g.branch = name;
+          return print("Cambiado a nueva rama '" + name + "'");
+        }
+        if (!g.logs[name]) return err("fatal: referencia inválida: " + name);
+        g.branch = name;
+        return print("Cambiado a rama '" + name + "'");
+      }
+
+      note("(no simulado todavía) git " + sub + " — simulados: init status add commit log branch switch checkout");
+    };
+
+    /* ---- aws ---- */
+    function s3url(x) {
+      var m = /^s3:\/\/([^\/]+)\/?(.*)$/.exec(x || "");
+      return m ? { b: m[1], k: m[2] } : null;
+    }
+    function putObject(bucket, key, content, src) {
+      st.aws.buckets[bucket][key] = { c: content, mod: nowStr() };
+      print("upload: " + src + " to s3://" + bucket + "/" + key);
+    }
+
+    cmd.aws = function (args) {
+      var p = parseArgs(args), svc = p.pos[0], op = p.pos[1], f = p.f, a = st.aws;
+      if (!svc) return note("uso: aws <servicio> <operación>   (simulados: sts s3 ec2 lambda iam logs)");
+
+      if (svc === "configure") return note("(simulado) el perfil 'default' ya está configurado con el usuario dixon-dev.");
+
+      if (svc === "sts" && op === "get-caller-identity") {
+        st.ran.sts = true;
+        return json({ UserId: "AIDAEXAMPLE123456789", Account: "123456789012", Arn: "arn:aws:iam::123456789012:user/dixon-dev" });
+      }
+
+      if (svc === "s3") {
+        if (op === "ls") {
+          var t = s3url(p.pos[2]);
+          if (!t) {
+            var names = Object.keys(a.buckets).sort();
+            return names.length ? names.forEach(function (b) { print(nowStr() + " " + b); }) : null;
+          }
+          if (!a.buckets[t.b]) return err("An error occurred (NoSuchBucket) when calling the ListObjectsV2 operation: The specified bucket does not exist");
+          var seen = {}, rows = [];
+          Object.keys(a.buckets[t.b]).sort().forEach(function (k) {
+            if (t.k && k.indexOf(t.k) !== 0) return;
+            var restKey = k.slice(t.k.length), slash = restKey.indexOf("/");
+            if (!f.recursive && slash >= 0) {
+              var pre = restKey.slice(0, slash + 1);
+              if (!seen[pre]) { seen[pre] = 1; rows.push("                           PRE " + pre); }
+            } else {
+              var o = a.buckets[t.b][k];
+              rows.push(o.mod + " " + String(o.c.length) + " " + (f.recursive ? k : restKey));
+            }
+          });
+          return rows.forEach(function (r) { print(r); });
+        }
+        if (op === "mb") {
+          var mb = s3url(p.pos[2]);
+          if (!mb) return err("usage: aws s3 mb <S3Uri>");
+          if (!/^[a-z0-9][a-z0-9.\-]{2,62}$/.test(mb.b)) return err("make_bucket failed: s3://" + mb.b + " An error occurred (InvalidBucketName) when calling the CreateBucket operation: The specified bucket is not valid.");
+          if (a.buckets[mb.b]) return err("make_bucket failed: s3://" + mb.b + " An error occurred (BucketAlreadyOwnedByYou) when calling the CreateBucket operation: Your previous request to create the named bucket succeeded and you already own it.");
+          a.buckets[mb.b] = {};
+          return print("make_bucket: " + mb.b);
+        }
+        if (op === "rb") {
+          var rb = s3url(p.pos[2]);
+          if (!rb || !a.buckets[rb.b]) return err("remove_bucket failed: An error occurred (NoSuchBucket) when calling the DeleteBucket operation: The specified bucket does not exist");
+          if (Object.keys(a.buckets[rb.b]).length) return err("remove_bucket failed: An error occurred (BucketNotEmpty) when calling the DeleteBucket operation: The bucket you tried to delete is not empty");
+          delete a.buckets[rb.b];
+          return print("remove_bucket: " + rb.b);
+        }
+        if (op === "cp") {
+          var src = p.pos[2], dst = p.pos[3], su = s3url(src), du = s3url(dst);
+          if (!src || !dst) return err("usage: aws s3 cp <LocalPath> <S3Uri> or <S3Uri> <LocalPath>");
+          if (!su && du) {
+            var node = st.fs[resolve(src)];
+            if (!node || node.t !== "f") return err("The user-provided path " + src + " does not exist.");
+            if (!a.buckets[du.b]) return err("upload failed: " + src + " to s3://" + du.b + "/" + du.k + " An error occurred (NoSuchBucket) when calling the PutObject operation: The specified bucket does not exist");
+            var key = (!du.k || du.k.slice(-1) === "/") ? du.k + baseOf(src) : du.k;
+            return putObject(du.b, key, node.c, src);
+          }
+          if (su && !du) {
+            if (!a.buckets[su.b] || !a.buckets[su.b][su.k]) return err("fatal error: An error occurred (404) when calling the HeadObject operation: Key \"" + su.k + "\" does not exist");
+            var dpath = resolve(dst), dnode = st.fs[dpath];
+            if (dnode && dnode.t === "d") dpath = dpath + "/" + baseOf(su.k);
+            if (!st.fs[parentOf(dpath)]) return err("download failed: " + dst + ": No existe el directorio destino");
+            st.fs[dpath] = { t: "f", c: a.buckets[su.b][su.k].c };
+            return print("download: s3://" + su.b + "/" + su.k + " to " + dst);
+          }
+          return note("(no simulado todavía) cp entre dos rutas del mismo tipo");
+        }
+        if (op === "sync") {
+          var ss = p.pos[2], dd = s3url(p.pos[3]);
+          var dir = resolve(ss), dn = st.fs[dir];
+          if (!dd || !dn || dn.t !== "d") return note("(no simulado todavía) sync: usa `aws s3 sync ./carpeta s3://bucket/`");
+          if (!a.buckets[dd.b]) return err("fatal error: An error occurred (NoSuchBucket) when calling the ListObjectsV2 operation: The specified bucket does not exist");
+          return under(dir).filter(function (k) { return st.fs[k].t === "f"; }).forEach(function (k) {
+            var r = k.slice(dir.length + 1);
+            putObject(dd.b, dd.k + r, st.fs[k].c, ss + "/" + r);
+          });
+        }
+        if (op === "rm") {
+          var rm = s3url(p.pos[2]);
+          if (!rm) return err("usage: aws s3 rm <S3Uri>");
+          if (!a.buckets[rm.b]) return err("fatal error: An error occurred (NoSuchBucket) when calling the ListObjectsV2 operation: The specified bucket does not exist");
+          var keys = f.recursive ? Object.keys(a.buckets[rm.b]).filter(function (k) { return k.indexOf(rm.k) === 0; }) : [rm.k];
+          return keys.forEach(function (k) { delete a.buckets[rm.b][k]; print("delete: s3://" + rm.b + "/" + k); });
+        }
+        if (op === "presign") {
+          var pr = s3url(p.pos[2]);
+          if (!pr) return err("usage: aws s3 presign <S3Uri>");
+          return print("https://" + pr.b + ".s3.amazonaws.com/" + pr.k + "?X-Amz-Expires=" + (f["expires-in"] || 3600) + "&X-Amz-Signature=simulado");
+        }
+        return note("(no simulado todavía) aws s3 " + (op || "") + " — simulados: ls mb rb cp sync rm presign");
+      }
+
+      if (svc === "ec2") {
+        var ids = [].concat(f["instance-ids"] || [], p.pos.slice(2));
+        if (op === "describe-instances") {
+          json({ Reservations: [{ Instances: a.instances.map(function (i) { return { InstanceId: i.id, InstanceType: i.type, State: { Name: i.state } }; }) }] });
+          return cleanOutputNote(f);
+        }
+        if (op === "run-instances") {
+          if (!f["image-id"]) return err("aws: error: the following arguments are required: --image-id");
+          var inst = { id: "i-" + hex(17), type: f["instance-type"] || "t3.micro", state: "running" };
+          a.instances.push(inst);
+          return json({ Instances: [{ InstanceId: inst.id, InstanceType: inst.type, State: { Name: "pending" } }] });
+        }
+        var map = { "start-instances": ["running", "StartingInstances"], "stop-instances": ["stopped", "StoppingInstances"], "terminate-instances": ["terminated", "TerminatingInstances"] };
+        if (map[op]) {
+          if (!ids.length) return err("aws: error: the following arguments are required: --instance-ids");
+          var out = [];
+          for (var i = 0; i < ids.length; i++) {
+            var found = a.instances.filter(function (x) { return x.id === ids[i]; })[0];
+            if (!found) return err("An error occurred (InvalidInstanceID.NotFound) when calling the " + op.split("-").map(function (w) { return w.charAt(0).toUpperCase() + w.slice(1); }).join("") + " operation: The instance ID '" + ids[i] + "' does not exist");
+            out.push({ InstanceId: found.id, CurrentState: { Name: map[op][0] }, PreviousState: { Name: found.state } });
+            found.state = map[op][0];
+          }
+          var res = {}; res[map[op][1]] = out;
+          return json(res);
+        }
+        return note("(no simulado todavía) aws ec2 " + (op || "") + " — simulados: describe-instances run-instances start/stop/terminate-instances");
+      }
+
+      if (svc === "lambda") {
+        if (op === "list-functions") {
+          json({ Functions: [{ FunctionName: "procesar-tickets", Runtime: "python3.12" }, { FunctionName: "notificar-slack", Runtime: "provided.al2023" }] });
+          return cleanOutputNote(f);
+        }
+        if (op === "invoke") {
+          var fn = f["function-name"], outFile = p.pos[2];
+          if (!fn || !outFile) return err("usage: aws lambda invoke --function-name <nombre> <archivo-salida>");
+          if (fn !== "procesar-tickets" && fn !== "notificar-slack") return err("An error occurred (ResourceNotFoundException) when calling the Invoke operation: Function not found: arn:aws:lambda:us-east-1:123456789012:function:" + fn);
+          st.fs[resolve(outFile)] = { t: "f", c: "{\"statusCode\": 200, \"body\": \"ok\"}\n" };
+          st.ran.lambda = true;
+          return json({ StatusCode: 200, ExecutedVersion: "$LATEST" });
+        }
+        return note("(no simulado todavía) aws lambda " + (op || "") + " — simulados: list-functions invoke");
+      }
+
+      if (svc === "iam") {
+        if (op === "list-users") return json({ Users: [{ UserName: "dixon-dev", Arn: "arn:aws:iam::123456789012:user/dixon-dev" }] });
+        if (op === "list-roles") return json({ Roles: [{ RoleName: "lambda-exec-role" }, { RoleName: "ecs-task-role" }] });
+        return note("(no simulado todavía) aws iam " + (op || "") + " — simulados: list-users list-roles");
+      }
+
+      if (svc === "logs" && op === "tail") {
+        var grp = p.pos[2];
+        if (!grp) return err("usage: aws logs tail <log-group>");
+        var ts = nowStr().replace(" ", "T");
+        print(ts + " START RequestId: " + hex(8) + " Version: $LATEST");
+        print(ts + " INFO ticket #4821 procesado");
+        print(ts + " END RequestId: " + hex(8));
+        return f.follow ? note("(simulado) --follow no queda esperando aquí; en la terminal real seguiría en vivo.") : null;
+      }
+
+      note("(no simulado todavía) aws " + svc + (op ? " " + op : "") + " — simulados: sts s3 ec2 lambda iam logs");
+    };
+
+    /* ---- az ---- */
+    function azGate(group, needProject) {
+      var z = st.az;
+      if (!z.ext) { err("ERROR: '" + group + "' is misspelled or not recognized by the system."); note("Pista: instala la extensión con `az extension add --name azure-devops`."); return false; }
+      if (!z.login) { err("ERROR: Please run 'az login' to setup account."); return false; }
+      if (needProject && (!z.org || !z.project)) { err("ERROR: --organization y --project no están configurados."); note("Pista: `az devops configure --defaults organization=https://dev.azure.com/ORG project=PROYECTO`."); return false; }
+      return true;
+    }
+    function prRow(pr) { return { pullRequestId: pr.id, title: pr.title, sourceRefName: "refs/heads/" + pr.src, targetRefName: "refs/heads/" + pr.dst, status: pr.status }; }
+
+    cmd.az = function (args) {
+      var p = parseArgs(args), g = p.pos[0], op = p.pos[1], op2 = p.pos[2], f = p.f, z = st.az;
+      if (!g) return note("uso: az <grupo> <comando>   (simulados: login extension devops repos pipelines boards)");
+
+      if (g === "login") {
+        z.login = true;
+        note("(simulado) Se abrió el navegador para iniciar sesión...");
+        return json([{ cloudName: "AzureCloud", name: "Suscripción Dixon", state: "Enabled", user: { name: "dixon@ejemplo.com", type: "user" } }]);
+      }
+      if (g === "extension") {
+        if (op === "add" && f.name === "azure-devops") { z.ext = true; return note("(simulado) extensión 'azure-devops' instalada."); }
+        return note("(no simulado todavía) usa: az extension add --name azure-devops");
+      }
+      if (g === "devops") {
+        if (!azGate("devops", false)) return;
+        if (op === "configure") {
+          if (f.list) { print("[defaults]"); print("organization = " + (z.org || "")); return print("project = " + (z.project || "")); }
+          args.forEach(function (x) {
+            var m = /^(organization|project)=(.*)$/.exec(x);
+            if (m) z[m[1] === "organization" ? "org" : "project"] = m[2];
+          });
+          return;
+        }
+        if (op === "project" && op2 === "list") return json([{ name: z.project || "helpdesk", state: "wellFormed" }]);
+        return note("(no simulado todavía) az devops " + (op || "") + " — simulados: configure project list");
+      }
+      if (g === "repos") {
+        if (!azGate("repos", true)) return;
+        if (op === "list") return listOut(f, [{ name: "helpdesk-api", defaultBranch: "refs/heads/main" }, { name: "infra", defaultBranch: "refs/heads/main" }], [["Name", "name"], ["DefaultBranch", "defaultBranch"]]);
+        if (op === "pr") {
+          if (op2 === "create") {
+            if (!f.title || !f["source-branch"]) return err("ERROR: se requieren --title y --source-branch");
+            var pr = { id: z.prs.length + 1, title: f.title, src: f["source-branch"], dst: f["target-branch"] || "main", status: "active" };
+            z.prs.push(pr);
+            return json(prRow(pr));
+          }
+          if (op2 === "list") {
+            var want = f.status || "active";
+            var list = z.prs.filter(function (x) { return want === "all" || x.status === want; }).map(prRow);
+            return listOut(f, list, [["ID", "pullRequestId"], ["Title", "title"], ["Status", "status"]]);
+          }
+          var target = z.prs.filter(function (x) { return String(x.id) === String(f.id); })[0];
+          if (["show", "update", "set-vote"].indexOf(op2) >= 0) {
+            if (!target) return err("ERROR: Pull request " + f.id + " not found.");
+            if (op2 === "show") return json(prRow(target));
+            if (op2 === "set-vote") return json({ id: target.id, vote: f.vote === "approve" ? 10 : 0 });
+            if (f.status === "completed" || f.status === "abandoned") target.status = f.status;
+            return json(prRow(target));
+          }
+        }
+        return note("(no simulado todavía) az repos " + (op || "") + " — simulados: list pr create/list/show/update/set-vote");
+      }
+      if (g === "pipelines") {
+        if (!azGate("pipelines", true)) return;
+        var defs = [{ id: 12, name: "build-api" }, { id: 13, name: "deploy-api" }];
+        if (op === "list") return listOut(f, defs, [["ID", "id"], ["Name", "name"]]);
+        if (op === "run") {
+          var def = defs.filter(function (d) { return d.name === f.name; })[0];
+          if (!def) return err("ERROR: The pipeline '" + (f.name || "") + "' was not found.");
+          var run = { id: ++z.runSeq, number: "20261020." + (z.runs.length + 1), pipeline: def.name, status: "completed", result: "succeeded", branch: f.branch || "main" };
+          z.runs.push(run);
+          return json({ id: run.id, buildNumber: run.number, status: "notStarted", sourceBranch: "refs/heads/" + run.branch, definition: { name: def.name } });
+        }
+        if (op === "runs") {
+          if (op2 === "list") return listOut(f, z.runs.map(function (r) { return { id: r.id, number: r.number, status: r.status, result: r.result, pipeline: r.pipeline }; }), [["Run ID", "id"], ["Number", "number"], ["Status", "status"], ["Result", "result"], ["Pipeline", "pipeline"]]);
+          if (op2 === "show") {
+            var r = z.runs.filter(function (x) { return String(x.id) === String(f.id); })[0];
+            return r ? json(r) : err("ERROR: Run " + f.id + " not found.");
+          }
+        }
+        return note("(no simulado todavía) az pipelines " + (op || "") + " — simulados: list run runs list/show");
+      }
+      if (g === "boards") {
+        if (!azGate("boards", true)) return;
+        if (op === "work-item") {
+          if (op2 === "create") {
+            if (!f.title || !f.type) return err("ERROR: se requieren --title y --type");
+            var wi = { id: z.items.length + 1, title: f.title, type: f.type, state: "New", assigned: null };
+            z.items.push(wi);
+            return json({ id: wi.id, fields: { "System.Title": wi.title, "System.WorkItemType": wi.type, "System.State": wi.state } });
+          }
+          var item = z.items.filter(function (x) { return String(x.id) === String(f.id); })[0];
+          if (op2 === "show" || op2 === "update") {
+            if (!item) return err("ERROR: Work item " + f.id + " does not exist.");
+            if (op2 === "update") { if (f.state) item.state = f.state; if (f["assigned-to"]) item.assigned = f["assigned-to"]; }
+            return json({ id: item.id, fields: { "System.Title": item.title, "System.WorkItemType": item.type, "System.State": item.state, "System.AssignedTo": item.assigned } });
+          }
+        }
+        return note("(no simulado todavía) az boards " + (op || "") + " — simulados: work-item create/show/update");
+      }
+      note("(no simulado todavía) az " + g + " — simulados: login extension devops repos pipelines boards");
+    };
+
+    /* ---- ejecución ---- */
+    function promptText() {
+      var b = inRepo() ? " (" + st.git.branch + ")" : "";
+      return "dixon@shell:" + showPath(st.cwd) + b + "$ ";
+    }
+    function refreshPrompt() { promptEl.textContent = promptText(); }
+
+    function run(line) {
+      print([[promptText(), "pg-prompt"], [line]]);
+      var trimmed = line.trim();
+      if (!trimmed) return;
+      st.hist.push(trimmed);
+      var toks = tokenize(trimmed), name = toks[0];
+      var ri = toks.indexOf(">") >= 0 ? toks.indexOf(">") : toks.indexOf(">>");
+      if (ri >= 0) {
+        var append = toks[ri] === ">>", target = toks[ri + 1];
+        if (name !== "echo" || !target) err("redirección: solo se soporta `echo \"texto\" > archivo` en esta simulación");
+        else {
+          var path = resolve(target), text = toks.slice(1, ri).join(" ") + "\n";
+          if (!st.fs[parentOf(path)] || (st.fs[path] && st.fs[path].t === "d")) err("bash: " + target + ": No existe el archivo o directorio");
+          else st.fs[path] = { t: "f", c: (append && st.fs[path] ? st.fs[path].c : "") + text };
+        }
+      } else if (cmd.hasOwnProperty(name)) {
+        cmd[name](toks.slice(1));
+      } else {
+        err("bash: " + name + ": orden no encontrada");
+        note("Escribe `help` para ver qué comandos están simulados.");
+      }
+      checkMissions();
+    }
+
+    /* ---- misiones ---- */
+    function renderMission() {
+      missionEl.innerHTML = "";
+      var head = document.createElement("div");
+      head.className = "pg-m-head";
+      var title = document.createElement("div");
+      title.className = "pg-m-title";
+      if (mIdx >= MISSIONS.length) {
+        title.textContent = "★ Todas las misiones completadas";
+        head.appendChild(title);
+        var done = document.createElement("div");
+        done.className = "pg-m-desc";
+        done.textContent = "Sigue explorando libre, o escribe `reset` para empezar de cero.";
+        missionEl.appendChild(head); missionEl.appendChild(done);
+        return;
+      }
+      var m = MISSIONS[mIdx];
+      title.textContent = "Misión " + (mIdx + 1) + "/" + MISSIONS.length + " · " + m.t;
+      var btns = document.createElement("div");
+      btns.className = "pg-m-btns";
+      var hintBtn = document.createElement("button"); hintBtn.type = "button"; hintBtn.textContent = "pista";
+      var skipBtn = document.createElement("button"); skipBtn.type = "button"; skipBtn.textContent = "saltar";
+      var resetBtn = document.createElement("button"); resetBtn.type = "button"; resetBtn.textContent = "reiniciar";
+      btns.appendChild(hintBtn); btns.appendChild(skipBtn); btns.appendChild(resetBtn);
+      head.appendChild(title); head.appendChild(btns);
+      var desc = document.createElement("div");
+      desc.className = "pg-m-desc";
+      desc.textContent = m.d.replace(/`/g, "");
+      var hint = document.createElement("div");
+      hint.className = "pg-m-hint";
+      hint.textContent = m.h;
+      hint.hidden = true;
+      hintBtn.addEventListener("click", function () { hint.hidden = !hint.hidden; input.focus(); });
+      skipBtn.addEventListener("click", function () { mIdx++; renderMission(); updateCount(); input.focus(); });
+      resetBtn.addEventListener("click", function () { start(); input.focus(); });
+      missionEl.appendChild(head); missionEl.appendChild(desc); missionEl.appendChild(hint);
+    }
+    function showMissionDetail() {
+      if (mIdx >= MISSIONS.length) return print("★ Ya completaste todas las misiones.", "pg-ok");
+      var m = MISSIONS[mIdx];
+      print("Misión " + (mIdx + 1) + "/" + MISSIONS.length + " · " + m.t, "pg-warn");
+      print(m.d.replace(/`/g, ""));
+      note("Pista: " + m.h);
+    }
+    function checkMissions() {
+      var advanced = false;
+      while (mIdx < MISSIONS.length && MISSIONS[mIdx].ok(st)) {
+        print("✔ Misión completada: " + MISSIONS[mIdx].t, "pg-ok");
+        mIdx++; advanced = true;
+      }
+      if (advanced) {
+        if (mIdx < MISSIONS.length) note("Siguiente: " + MISSIONS[mIdx].t + " — escribe `mision` para ver el detalle.");
+        else print("★ ¡Completaste todas las misiones!", "pg-ok");
+        renderMission(); updateCount();
+      }
+    }
+    function updateCount() {
+      var c = document.getElementById("cnt-play");
+      if (c) c.textContent = Math.min(mIdx, MISSIONS.length) + "/" + MISSIONS.length;
+    }
+
+    /* ---- autocompletado ---- */
+    function complete() {
+      var v = input.value, parts = v.split(/\s+/), last = parts[parts.length - 1], cands;
+      if (parts.length === 1) {
+        cands = Object.keys(cmd).filter(function (c) { return c.indexOf(last) === 0; });
+      } else {
+        var dirPart = last.lastIndexOf("/") >= 0 ? last.slice(0, last.lastIndexOf("/") + 1) : "";
+        var base = last.slice(dirPart.length);
+        cands = kids(resolve(dirPart || ".")).map(baseOf).filter(function (n) { return n.indexOf(base) === 0; }).map(function (n) {
+          return dirPart + n + (st.fs[resolve(dirPart + n)].t === "d" ? "/" : "");
+        });
+      }
+      if (!cands.length) return;
+      if (cands.length === 1) {
+        parts[parts.length - 1] = cands[0];
+        input.value = parts.join(" ") + (cands[0].slice(-1) === "/" ? "" : " ");
+        return;
+      }
+      var pre = cands.reduce(function (a, b) { var i = 0; while (i < a.length && a.charAt(i) === b.charAt(i)) i++; return a.slice(0, i); });
+      if (pre.length > last.length) { parts[parts.length - 1] = pre; input.value = parts.join(" "); }
+      print([[promptText(), "pg-prompt"], [v]]);
+      note(cands.join("  "));
+    }
+
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") {
+        var line = input.value;
+        input.value = "";
+        run(line);
+        histPos = st.hist.length;
+        refreshPrompt();
+        screen.scrollTop = screen.scrollHeight;
+      } else if (e.key === "ArrowUp") {
+        e.preventDefault();
+        if (histPos > 0) { histPos--; input.value = st.hist[histPos]; }
+      } else if (e.key === "ArrowDown") {
+        e.preventDefault();
+        if (histPos < st.hist.length - 1) { histPos++; input.value = st.hist[histPos]; }
+        else { histPos = st.hist.length; input.value = ""; }
+      } else if (e.key === "Tab") {
+        e.preventDefault();
+        complete();
+        screen.scrollTop = screen.scrollHeight;
+      } else if (e.key === "l" && e.ctrlKey) {
+        e.preventDefault();
+        cmd.clear();
+      } else if (e.key === "c" && e.ctrlKey && input.selectionStart === input.selectionEnd) {
+        e.preventDefault();
+        print([[promptText(), "pg-prompt"], [input.value + "^C"]]);
+        input.value = "";
+      }
+    });
+    screen.addEventListener("click", function () {
+      if (!window.getSelection || window.getSelection().toString() === "") input.focus();
+    });
+
+    function start() {
+      st = freshState(); mIdx = 0; histPos = 0; prevCwd = null;
+      outEl.innerHTML = "";
+      print("dixon@shell — playground simulado", "pg-warn");
+      note("Nada se ejecuta de verdad. Escribe `help` para ver los comandos o `mision` para ver tu objetivo.");
+      print("");
+      refreshPrompt(); renderMission(); updateCount();
+    }
+
+    start();
+
+    return {
+      el: el,
+      focus: function () { input.focus(); },
+      prefill: function (text) { input.value = text; input.focus(); },
+      count: updateCount
+    };
+  }
+
+  function getPlayground() {
+    if (!PG) PG = createPlayground();
+    return PG;
+  }
 
   function renderCounts() {
     Object.keys(DATA).forEach(function (key) {
@@ -1356,6 +2505,7 @@ a { color: var(--accent); }
     });
   }
   renderCounts();
+  document.getElementById("cnt-play").textContent = "0/" + MISSIONS.length;
 
   renderPanel(currentTab);
 })();
