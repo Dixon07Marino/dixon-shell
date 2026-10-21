@@ -425,6 +425,16 @@ a { color: var(--accent); }
 @keyframes gon-jump { 0%, 100% { transform: translateY(0); } 40% { transform: translateY(-9px); } }
 #gonSvg #gonBody, #gonSvg #gonHead, #gonSvg .mug { cursor: pointer; }
 
+#gonSvg .note { opacity: 0; animation: gon-note 4.8s ease-out infinite; }
+#gonSvg .n2 { animation-delay: 1.6s; } #gonSvg .n3 { animation-delay: 3.2s; }
+.gon.typing #gonSvg .note { animation-duration: 2.8s; }
+@keyframes gon-note {
+  0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(.7); }
+  15% { opacity: 1; }
+  60% { opacity: .9; transform: translate(-8px, -22px) rotate(-10deg) scale(1); }
+  100% { opacity: 0; transform: translate(2px, -44px) rotate(8deg) scale(1.05); }
+}
+
 </style>
 
 <div class="app">
@@ -544,6 +554,17 @@ a { color: var(--accent); }
         <path d="M52 30 L56 38 M70 14 L72 26 M90 16 L88 28" stroke="#5a6396" stroke-width="1.1" stroke-linecap="round" fill="none"/>
       </g>
 
+      <!-- headphones -->
+      <g id="gonPhones">
+        <path d="M44 55 C37 30 50 11 71 11 C93 11 103 30 98 47" stroke="#414868" stroke-width="5.2" fill="none" stroke-linecap="round"/>
+        <path d="M44 55 C37 30 50 11 71 11 C93 11 103 30 98 47" stroke="#7a84b8" stroke-width="1.4" fill="none" stroke-linecap="round" transform="translate(0 -1.6)"/>
+        <ellipse cx="98" cy="53" rx="4.6" ry="8" fill="#3b4261"/>
+        <ellipse cx="43" cy="63" rx="7.2" ry="10.4" fill="#bb9af7"/>
+        <ellipse cx="43" cy="63" rx="7.2" ry="10.4" fill="none" stroke="#7d5fc0" stroke-width="1.4"/>
+        <ellipse cx="44.4" cy="63" rx="3.6" ry="6.6" fill="#8466c9"/>
+        <path d="M38 56 q2 -3 5 -3.4" stroke="#e6d9ff" stroke-width="1.4" fill="none" stroke-linecap="round" opacity=".8"/>
+      </g>
+
       <!-- parches -->
       <g id="gonPatches">
         <g transform="rotate(-22 86 49)">
@@ -583,9 +604,8 @@ a { color: var(--accent); }
 
       <!-- nariz, boca y lengua -->
       <path d="M95 71 q2.6 1.6 0 3.4" stroke="#d99669" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-      <path class="mouth" d="M80 80 q5 2.2 10 -.6" stroke="#7a3b2a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-      <path class="tongue" d="M84 80.6 q2.4 6.4 5.4 .6 z" fill="#ff7f9a" stroke="#c9506b" stroke-width=".7" stroke-linejoin="round"/>
-      <circle cx="76" cy="77" r="3" fill="#ff9e64" opacity=".25"/>
+      <path class="mouth" d="M72 80 q3.5 2.6 7 0" stroke="#7a3b2a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+      <circle cx="70" cy="77" r="3" fill="#ff9e64" opacity=".25"/>
     </g>
 
     <!-- brazos -->
@@ -602,6 +622,13 @@ a { color: var(--accent); }
   <!-- teclado -->
   <rect x="100" y="133" width="62" height="5" rx="2" fill="#414868"/>
   <g fill="#7aa2f7" opacity=".65"><rect x="104" y="134" width="4" height="1.6"/><rect x="111" y="134" width="4" height="1.6"/><rect x="118" y="134" width="4" height="1.6"/><rect x="125" y="134" width="4" height="1.6"/><rect x="132" y="134" width="4" height="1.6"/><rect x="139" y="134" width="4" height="1.6"/><rect x="146" y="134" width="4" height="1.6"/><rect x="153" y="134" width="4" height="1.6"/></g>
+
+  <!-- notas musicales -->
+  <g id="gonNotes" aria-hidden="true">
+    <g transform="translate(22 52)"><g class="note n1" fill="#bb9af7" stroke="#bb9af7"><ellipse cx="0" cy="0" rx="3.3" ry="2.4" transform="rotate(-20)"/><path d="M2.9 -.8 V-10.5 q4.4 1.4 3.2 6" fill="none" stroke-width="1.7" stroke-linecap="round"/></g></g>
+    <g transform="translate(24 36)"><g class="note n2" fill="#7dcfff" stroke="#7dcfff"><ellipse cx="0" cy="0" rx="3.3" ry="2.4" transform="rotate(-20)"/><ellipse cx="8" cy="-1.8" rx="3.3" ry="2.4" transform="rotate(-20 8 -1.8)"/><path d="M2.9 -.8 V-10.5 L10.9 -12 V-2.6 M2.9 -10.5 L10.9 -12" fill="none" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g></g>
+    <g transform="translate(18 62)"><g class="note n3" fill="#9ece6a" stroke="#9ece6a"><ellipse cx="0" cy="0" rx="3.3" ry="2.4" transform="rotate(-20)"/><path d="M2.9 -.8 V-10.5 q4.4 1.4 3.2 6" fill="none" stroke-width="1.7" stroke-linecap="round"/></g></g>
+  </g>
 
   <!-- monitor -->
   <g id="gonMonitor">
