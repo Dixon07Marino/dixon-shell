@@ -510,6 +510,13 @@ a { color: var(--accent); }
 
   <!-- Gon -->
   <g id="gonBody">
+    <!-- caña de pescar y mochila (detrás del torso) -->
+    <g id="gonRod">
+      <path d="M42 104 L12 14" stroke="#e8e3d0" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M42 104 L36 86" stroke="#9aa5ce" stroke-width="4.4" stroke-linecap="round"/>
+    </g>
+    <rect x="31" y="90" width="22" height="34" rx="6" fill="#d89b3c"/>
+    <path d="M33 118 l3.5 -8 l3.5 8 l3.5 -8 l3.5 8 l3.5 -8 M33 106 l3.5 -8 l3.5 8 l3.5 -8 l3.5 8 l3.5 -8" stroke="#8a3d1f" stroke-width="2" fill="none" stroke-linejoin="round"/>
     <!-- pierna / short / zapato -->
     <rect x="44" y="124" width="52" height="15" rx="6" fill="#2f7d4a"/>
     <rect x="84" y="130" width="13" height="38" rx="4" fill="#f0b98d"/>
@@ -517,34 +524,68 @@ a { color: var(--accent); }
     <rect x="80" y="170" width="27" height="3" rx="1" fill="#e8e3d0"/>
     <!-- torso (chaqueta verde) -->
     <path d="M42 126 C40 104 44 92 58 88 L76 88 C84 92 86 106 82 126 Z" fill="#3fa564"/>
-    <path d="M58 88 L76 88 L70 126 L60 126 Z" fill="#2f7d4a" opacity=".55"/>
+    <path d="M58 88 L76 88 L70 126 L60 126 Z" fill="#2f7d4a" opacity=".45"/>
+    <path d="M77 94 L74 126" stroke="#d64545" stroke-width="3" stroke-linecap="round"/>
+    <path d="M60 86 Q72 98 84 90 L82 100 Q71 106 62 98 Z" fill="#1f5a35"/>
+    <path d="M62 98 Q71 106 82 100" stroke="#d64545" stroke-width="1.6" fill="none" stroke-linecap="round"/>
     <rect x="43" y="120" width="40" height="5" fill="#e0af68"/>
-    <!-- cuello -->
     <rect x="60" y="80" width="12" height="11" rx="3" fill="#e0a578"/>
 
     <!-- cabeza -->
     <g id="gonHead">
-      <circle cx="68" cy="58" r="25" fill="#f0b98d"/>
-      <ellipse cx="45" cy="62" rx="4.5" ry="6" fill="#e0a578"/>
-      <!-- pelo -->
-      <path d="M42 58 C40 49 44 43 41 34 L52 40 L52 23 L62 35 L71 17 L77 35 L90 26 L86 41 L99 43 L88 53 C90 56 90 59 89 62 C80 53 56 52 42 58 Z"
-            fill="#262a40" stroke="#7a84b8" stroke-width="1.2" stroke-linejoin="round"/>
-      <path d="M58 33 L62 38 M74 30 L77 36" stroke="#7a84b8" stroke-width="1" stroke-linecap="round" fill="none"/>
-      <!-- cara -->
-      <path d="M88 64 q3 3 0 6" stroke="#d99669" stroke-width="1.6" fill="none" stroke-linecap="round"/>
-      <path d="M62 56 L80 58" stroke="#12131c" stroke-width="2" stroke-linecap="round"/>
-      <g id="gonEye">
-        <g class="eye-open">
-          <ellipse cx="73" cy="64" rx="5" ry="6.4" fill="#fff"/>
-          <g id="gonPupil">
-            <ellipse cx="74.5" cy="65" rx="3.4" ry="4.8" fill="#6b3f1d"/>
-            <circle cx="75.5" cy="63" r="1.5" fill="#fff"/>
-          </g>
-        </g>
-        <path class="eye-happy" d="M68 65 q5 -6 10 0" stroke="#12131c" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <circle cx="68" cy="58" r="26" fill="#f2bf96"/>
+      <ellipse cx="43" cy="63" rx="4.6" ry="6.2" fill="#e0a578"/>
+      <!-- pelo: capa verde de contorno + masa negra -->
+      <g id="gonHair">
+        <path transform="translate(68 40) scale(1.13) translate(-68 -40)" fill="#3fa564" stroke="#3fa564" stroke-width="3" stroke-linejoin="round"
+              d="M42 60 L24 40 L40 46 L30 18 L48 36 L46 8 L58 30 L68 4 L74 28 L88 8 L86 32 L104 20 L94 42 L110 44 L94 52 L88 56 L80 50 L72 57 L64 50 L56 57 L48 52 Z"/>
+        <path fill="#151621" stroke="#5a6396" stroke-width="1.1" stroke-linejoin="round"
+              d="M42 60 L24 40 L40 46 L30 18 L48 36 L46 8 L58 30 L68 4 L74 28 L88 8 L86 32 L104 20 L94 42 L110 44 L94 52 L88 56 L80 50 L72 57 L64 50 L56 57 L48 52 Z"/>
+        <path d="M52 30 L56 38 M70 14 L72 26 M90 16 L88 28" stroke="#5a6396" stroke-width="1.1" stroke-linecap="round" fill="none"/>
       </g>
-      <path class="mouth" d="M76 74 q4 3 8 -1" stroke="#7a3b2a" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-      <circle cx="68" cy="71" r="3" fill="#ff9e64" opacity=".28"/>
+
+      <!-- parches -->
+      <g id="gonPatches">
+        <g transform="rotate(-22 86 49)">
+          <rect x="79" y="45" width="14" height="7" rx="2.5" fill="#f4e7cf" stroke="#c9b48a" stroke-width=".6"/>
+          <path d="M84 46 v5 M88 46 v5" stroke="#c9b48a" stroke-width=".8"/>
+        </g>
+        <g transform="rotate(38 61 79)">
+          <rect x="53" y="75" width="16" height="7.5" rx="2.5" fill="#f4e7cf" stroke="#c9b48a" stroke-width=".6"/>
+          <path d="M59 76 v5.5 M63 76 v5.5" stroke="#c9b48a" stroke-width=".8"/>
+        </g>
+      </g>
+
+      <!-- cejas gruesas, fruncidas -->
+      <path d="M56 52 L75 57" stroke="#151621" stroke-width="3.6" stroke-linecap="round"/>
+      <path d="M80 57 L96 52" stroke="#151621" stroke-width="3.2" stroke-linecap="round"/>
+
+      <!-- ojos grandes ámbar -->
+      <g class="eye-open">
+        <ellipse cx="65" cy="66" rx="6" ry="7.4" fill="#fff"/>
+        <g class="pupil" id="gonPupil">
+          <ellipse cx="66.5" cy="67" rx="4.6" ry="6" fill="#b9732c"/>
+          <ellipse cx="66.5" cy="68" rx="2.6" ry="3.6" fill="#2b1a0e"/>
+          <circle cx="68.3" cy="64.6" r="1.9" fill="#fff"/>
+          <circle cx="64.8" cy="70" r=".9" fill="#fff" opacity=".8"/>
+        </g>
+      </g>
+      <g class="eye-open">
+        <ellipse cx="87" cy="66" rx="5" ry="7" fill="#fff"/>
+        <g class="pupil">
+          <ellipse cx="88" cy="67" rx="3.8" ry="5.6" fill="#b9732c"/>
+          <ellipse cx="88" cy="68" rx="2.1" ry="3.3" fill="#2b1a0e"/>
+          <circle cx="89.4" cy="64.8" r="1.6" fill="#fff"/>
+        </g>
+      </g>
+      <path class="eye-happy" d="M59 67 q6 -7 12 0" stroke="#151621" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+      <path class="eye-happy" d="M82 67 q5 -6 10 0" stroke="#151621" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+
+      <!-- nariz, boca y lengua -->
+      <path d="M95 71 q2.6 1.6 0 3.4" stroke="#d99669" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+      <path class="mouth" d="M80 80 q5 2.2 10 -.6" stroke="#7a3b2a" stroke-width="1.6" fill="none" stroke-linecap="round"/>
+      <path class="tongue" d="M84 80.6 q2.4 6.4 5.4 .6 z" fill="#ff7f9a" stroke="#c9506b" stroke-width=".7" stroke-linejoin="round"/>
+      <circle cx="76" cy="77" r="3" fill="#ff9e64" opacity=".25"/>
     </g>
 
     <!-- brazos -->
@@ -2344,8 +2385,8 @@ a { color: var(--accent); }
     var gon = document.getElementById("gon");
     var svg = document.getElementById("gonSvg");
     var bubble = document.getElementById("gonBubble");
-    var pupil = document.getElementById("gonPupil");
-    var eye = document.getElementById("gonEye");
+    var pupils = svg.querySelectorAll(".pupil");
+    var eye = svg.querySelector(".eye-open");
     var mug = document.getElementById("gonMug");
     var lines = [
       "¡Hoy toca aprender algo nuevo!",
@@ -2389,14 +2430,15 @@ a { color: var(--accent); }
       cheerT = setTimeout(function () { gon.classList.remove("cheer"); }, 900);
     });
 
-    /* Los ojos siguen al cursor (máx. ~1.6 unidades del SVG). */
+    /* Los ojos siguen al cursor (máx. ~1.6 unidades del SVG), ambos a la vez. */
     document.addEventListener("mousemove", function (e) {
       var r = eye.getBoundingClientRect();
       var dx = e.clientX - (r.left + r.width / 2);
       var dy = e.clientY - (r.top + r.height / 2);
       var dist = Math.sqrt(dx * dx + dy * dy) || 1;
       var k = Math.min(1, dist / 160) * 1.6;
-      pupil.style.transform = "translate(" + (dx / dist * k).toFixed(2) + "px," + (dy / dist * k).toFixed(2) + "px)";
+      var t = "translate(" + (dx / dist * k).toFixed(2) + "px," + (dy / dist * k).toFixed(2) + "px)";
+      Array.prototype.forEach.call(pupils, function (p) { p.style.transform = t; });
     });
   })();
 
