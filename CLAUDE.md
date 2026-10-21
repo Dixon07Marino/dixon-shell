@@ -11,11 +11,11 @@ Ayudar a un desarrollador a memorizar/repasar comandos de uso frecuente mediante
 
 ## Estructura de `index.html`
 
-- **CSS embebido** (`<style>` en el `<head>`): tema terminal oscuro, variables de color por categoría (`--accent` verde/git, `--amber` linux/claude, `--blue` docker, `--violet` sql).
+- **CSS embebido** (`<style>` en el `<head>`): tema terminal oscuro, variables de color por categoría (`--accent` verde/git, `--amber` linux/claude, `--blue` docker, `--violet` sql, `--cyan` go, `--orange` aws, `--azure` azure devops).
 - **Fuente embebida**: JetBrains Mono como `data:font/woff2;base64,...` — por eso el archivo pesa ~650KB. No tocar ese bloque salvo para cambiar de fuente.
 - **Boot sequence** (`renderBoot`): simula tipeo de `whoami` / `echo $STATUS`. Respeta `prefers-reduced-motion`.
 - **`TIPS` (array)**: cada tip tiene `{ cat, color, text }`. `cat` debe coincidir con una clave de `DATA` y `color` con una clave de `catColorVar`.
-- **`DATA` (objeto)**: una clave por pestaña (`git`, `linux`, `docker`, `sql`, `claude`). Cada una es un array de grupos `{ grp: "Nombre del grupo", items: [[comando, descripción], ...] }`.
+- **`DATA` (objeto)**: una clave por pestaña (`git`, `linux`, `docker`, `sql`, `claude`, `go`, `aws`, `azure`). Cada una es un array de grupos `{ grp: "Nombre del grupo", items: [[comando, descripción], ...] }`.
 - **Render de paneles/tabs y filtro de búsqueda**: al final del script, construye el DOM de `DATA` y conecta el input de búsqueda (`#filterInput`) para filtrar por texto en comando o descripción.
 
 ## Cómo agregar contenido
@@ -40,3 +40,12 @@ Ayudar a un desarrollador a memorizar/repasar comandos de uso frecuente mediante
 ## Verificar cambios
 
 No hay servidor ni build: abre `index.html` directamente en el navegador (doble clic o `start index.html` en Windows) y revisa la pestaña afectada, el filtro de búsqueda y que el contador de tips sea correcto si tocaste `TIPS`.
+
+## Playground (shell simulada)
+
+Pestaña `playground` (`data-tab="play"`): un intérprete en JS puro, sin ejecución real. Vive en la sección `PLAYGROUND` del script (`createPlayground`, `MISSIONS`).
+- Estado en memoria (`freshState`): filesystem virtual plano (`ruta → {t:"d"|"f", c}`), git, S3/EC2/Lambda y Azure DevOps de juguete. Las salidas están simplificadas a propósito.
+- **Nuevo comando básico**: agrega `cmd.nombre = function (args) {...}`; el autocompletado con Tab lo toma solo.
+- **Nueva misión**: añade `{ t, d, h, ok: function (s) {...} }` a `MISSIONS`; `ok` lee el estado (`s.fs`, `s.git`, `s.aws`, `s.az`, `s.ran`). El contador de la pestaña se genera solo.
+- Cada fila del cheatsheet tiene un botón `▶ probar` que precarga el comando en la terminal (delegación de eventos en `panelHost`).
+- Mantener las salidas de error realistas pero en español cuando sean mensajes de la propia shell; las de `aws`/`az` conservan su texto original en inglés.
